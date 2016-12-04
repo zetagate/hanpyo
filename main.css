@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+#gridBox {
+    float: left;
+    width: auto;
+    margin-right: 6px;
+}
+
+#grid1 {
+    width: 100% !important;
+    height: 390px !important;
+    background-color: white !important;
+}
+
+#grid2 {
+    width: 100% !important;
+    height: 225px !important;
+    background-color: white !important;
+}
+
+#canvas {
+    float: left;
+    border: 1px solid #000000;
+}
