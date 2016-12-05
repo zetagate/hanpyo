@@ -1,9 +1,11 @@
 
-var grid1;
-var grid2;
-var canvas;
-var ctx;
+let grid1;
+let grid2;
+let canvas;
+let ctx;
 
+const MIN_GRIDBOX_WIDTH = 230;
+const CANVAS_PADDING = 10;
 
 
 $(window).on("load", function()
@@ -30,20 +32,20 @@ window.onresize = function()
 
 function setSizes()
 {
-    var docuWidth = $(document).width();
-    var size = docuWidth - (canvas.width+20);
-    if(size > 230) {
-        $(gridBox).width(docuWidth - (canvas.width+30));
+    let docuWidth = $(document).width();
+    let size = docuWidth - (canvas.width+CANVAS_PADDING);
+    if(size > MIN_GRIDBOX_WIDTH) {
+        $(gridBox).width(docuWidth - canvas.width - 3*CANVAS_PADDING);
     }
     else {
-        $(gridBox).width(docuWidth-20);
+        $(gridBox).width(docuWidth-2*CANVAS_PADDING);
     }
 }
 
 
 function initGrid(grid)
 {
-    grid.setImagePath("dhtmlx/skins/web/imgs/dhxgrid_terrace/");
+    //grid.setImagePath("dhtmlx/skins/web/imgs/dhxgrid_terrace/");
     grid.setHeader("코드,과목명,분반,교수,대상,학점,설계,비고,정원,개설학부");
     grid.setInitWidths("55,150,40,60,70,40,40,40,40,100");
     grid.setColAlign("left,left,left,left,left,left,left,left,left");
