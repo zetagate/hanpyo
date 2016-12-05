@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <sbj> <!--subject-->
+    <cod/> <!--subject code-->
+    <ttk/> <!--title korean-->
+    <tty/> <!--title english-->
+    <crd/> <!--credit point-->
+    <cls/> <!--class no-->
+    <cap/> <!--capacity-->
+    <dep/> <!--department-->
+    <tar/> <!--target-->
+    <dvi/> <!--division-->
+    <tm1/>
+    <tm2/>
+    <tm3/>
+    <tm4/>
+    <tm5/>
+    <tm6/>
+    <tm7/>
+    <tm8/>
+    <tm9/>
+    <tm10/>
+    <tm11/>
+    <tm12/>
+    <tm13/>
+    <tm14/>
+    <tm15/>
+    <tm16/>
+    <prf/> <!--professor-->
+    <eng/>
+    <dsg/>
+    <elr/>
+  </sbj>
+
+  <sbj> <!--subject-->
+    <cod/> <!--subject code-->
+    <ttk/> <!--title korean-->
+    <tty/> <!--title english-->
+    <crd/> <!--credits-->
+    <cls/> <!--class no-->
+    <cap/> <!--capacity-->
+    <dep/> <!--department-->
+    <tar/> <!--target-->
+    <dvi/> <!--division-->
+    <tm1/>
+    <tm2/>
+    <tm3/>
+    <tm4/>
+    <tm5/>
+    <tm6/>
+    <tm7/>
+    <tm8/>
+    <tm9/>
+    <tm10/>
+    <tm11/>
+    <tm12/>
+    <tm13/>
+    <tm14/>
+    <tm15/>
+    <tm16/>
+    <prf/> <!--professor-->
+    <eng/>
+    <dsg/>
+    <elr/>
+  </sbj>
+
+</root>

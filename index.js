@@ -4,19 +4,9 @@ var grid2;
 var canvas;
 var ctx;
 
-function setSizes()
-{
-    var docuWidth = $(document).width();
-    var size = docuWidth-(canvas.width+20);
-    if(size>230) {
-        $(gridBox).width(docuWidth-(canvas.width+30));
-    }
-    else {
-        $(gridBox).width(docuWidth-20);
-    }
-}
 
-function onLoad()
+
+$(window).on("load", function()
 {
     canvas = $("#canvas")[0];
     ctx = canvas.getContext("2d");
@@ -29,11 +19,25 @@ function onLoad()
     setSizes();
     grid1.setSizes();
     grid2.setSizes();
-}
+
+    loadCatalog(grid1);
+});
 
 window.onresize = function()
 {
     setSizes();
+}
+
+function setSizes()
+{
+    var docuWidth = $(document).width();
+    var size = docuWidth - (canvas.width+20);
+    if(size > 230) {
+        $(gridBox).width(docuWidth - (canvas.width+30));
+    }
+    else {
+        $(gridBox).width(docuWidth-20);
+    }
 }
 
 
@@ -49,8 +53,21 @@ function initGrid(grid)
     dhtmlxEvent(window, "resize", function(){grid.setSizes();});
     grid.init();
 
-    grid.addRow(1,["cod","컴퓨터","01","김이박","컴공","2","1","Y","40","컴공"]);
-    grid.addRow(2,["cod","컴퓨터","01","김이박","컴공","2","1","Y","40","컴공"]);
-    grid.addRow(3,["cod","컴퓨터","01","김이박","컴공","2","1","Y","40","컴공"]);
-    grid.addRow(4,["cod","컴퓨터","01","김이박","컴공","2","1","Y","40","컴공"]);
+}
+
+function loadCatalog(grid)
+{
+    for(let i=0; i<SUBJECT_DATA.length; ++i) {
+        let cod = SUBJECT_DATA[i][0]; //code
+        let ttk = SUBJECT_DATA[i][1]; //title korean
+        let cls = SUBJECT_DATA[i][3]; //class
+        let prf = SUBJECT_DATA[i][7]; //professor
+        let tar = SUBJECT_DATA[i][6]; //target
+        let crd = SUBJECT_DATA[i][2]; //credits
+        let dsg = SUBJECT_DATA[i][9]; //design credits
+        let spe = SUBJECT_DATA[i][8] + SUBJECT_DATA[i][10];//special information
+        let cap = SUBJECT_DATA[i][4]; //capacity
+        let dep = SUBJECT_DATA[i][5]; //depeartment
+        grid.addRow(i+1, [cod, ttk, cls, prf, tar, crd, dsg, spe, cap, dep]);
+    }
 }
