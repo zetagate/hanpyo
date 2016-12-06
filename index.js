@@ -3,6 +3,7 @@ let grid1;
 let grid2;
 let canvas;
 let ctx;
+let cartList = [];
 
 const MIN_GRIDBOX_WIDTH = 230;
 const CANVAS_PADDING = 10;
@@ -12,10 +13,11 @@ $(window).on("load", function()
 {
     canvas = $("#canvas")[0];
     ctx = canvas.getContext("2d");
-    grid1 = new dhtmlXGridObject("grid1");
-    initGrid(grid1);
 
+    grid1 = new dhtmlXGridObject("grid1");
     grid2 = new dhtmlXGridObject("grid2");
+
+    initGrid(grid1);
     initGrid(grid2);
 
     setSizes();
@@ -23,12 +25,11 @@ $(window).on("load", function()
     grid2.setSizes();
 
     loadCatalog(grid1);
+
+    grid1.attachEvent("onRowSelect", onSelectCatalog);
+    grid1.attachEvent("onRowDblClicked", onDblClickCatalog);
 });
 
-window.onresize = function()
-{
-    setSizes();
-}
 
 function setSizes()
 {
@@ -57,6 +58,7 @@ function initGrid(grid)
 
 }
 
+
 function loadCatalog(grid)
 {
     for(let i=0; i<SUBJECT_DATA.length; ++i) {
@@ -70,6 +72,58 @@ function loadCatalog(grid)
         let spe = SUBJECT_DATA[i][8] + SUBJECT_DATA[i][10];//special information
         let cap = SUBJECT_DATA[i][4]; //capacity
         let dep = SUBJECT_DATA[i][5]; //depeartment
+        //dependency : pkToIdx()
         grid.addRow(i+1, [cod, ttk, cls, prf, tar, crd, dsg, spe, cap, dep]);
     }
+}
+
+
+function idxToPk(idx)
+{
+    return SUBJECT_DATA[idx][0] + SUBJECT_DATA[idx][3];
+}
+
+
+function pkToIdx(pk)
+{
+    let cod = pk.substring(0,6);
+    let cls = pk.substring(6,8);
+    for(let i in SUBJECT_DATA) {
+        if(cod == SUBJECT_DATA[i][0] && cls == SUBJECT_DATA[i][3]) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+function cartTo(pk, grid)
+{
+    cartList.push(pk);
+    grid.addRow(cartList.length+1, SUBJECT_DATA[pkToIdx(pk)]);
+}
+
+
+
+//*********************
+// Events
+//********************
+
+
+
+window.onresize = function()
+{
+    setSizes();
+}
+
+
+function onSelectCatalog(row, col)
+{
+
+}
+
+
+function onDblClickCatalog(row, col)
+{
+    cartTo(idxToPk(row-1), grid2);
 }
