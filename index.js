@@ -62,19 +62,24 @@ function initGrid(grid)
 function loadCatalog(grid)
 {
     for(let i=0; i<SUBJECT_DATA.length; ++i) {
-        let cod = SUBJECT_DATA[i][0]; //code
-        let ttk = SUBJECT_DATA[i][1]; //title korean
-        let cls = SUBJECT_DATA[i][3]; //class
-        let prf = SUBJECT_DATA[i][7]; //professor
-        let tar = SUBJECT_DATA[i][6]; //target
-        let crd = SUBJECT_DATA[i][2]; //credits
-        let dsg = SUBJECT_DATA[i][9]; //design credits
-        let spe = SUBJECT_DATA[i][8] + SUBJECT_DATA[i][10];//special information
-        let cap = SUBJECT_DATA[i][4]; //capacity
-        let dep = SUBJECT_DATA[i][5]; //depeartment
-        //dependency : pkToIdx()
-        grid.addRow(i+1, [cod, ttk, cls, prf, tar, crd, dsg, spe, cap, dep]);
+        addRow(grid1, i, i+1);
     }
+}
+
+
+function addRow(grid, idx, row)
+{
+    let cod = SUBJECT_DATA[idx][0]; //code
+    let ttk = SUBJECT_DATA[idx][1]; //title korean
+    let cls = SUBJECT_DATA[idx][3]; //class
+    let prf = SUBJECT_DATA[idx][7]; //professor
+    let tar = SUBJECT_DATA[idx][6]; //target
+    let crd = SUBJECT_DATA[idx][2]; //credits
+    let dsg = SUBJECT_DATA[idx][9]; //design credits
+    let spe = SUBJECT_DATA[idx][8] + SUBJECT_DATA[idx][10];//special information
+    let cap = SUBJECT_DATA[idx][4]; //capacity
+    let dep = SUBJECT_DATA[idx][5]; //depeartment
+    grid.addRow(row, [cod, ttk, cls, prf, tar, crd, dsg, spe, cap, dep]);
 }
 
 
@@ -97,11 +102,13 @@ function pkToIdx(pk)
 }
 
 
-function cartTo(pk, grid)
+function putCart(pk, grid)
 {
     cartList.push(pk);
-    grid.addRow(cartList.length+1, SUBJECT_DATA[pkToIdx(pk)]);
+    addRow(grid2, pkToIdx(pk), cartList.length+1);
 }
+
+
 
 
 
@@ -125,5 +132,5 @@ function onSelectCatalog(row, col)
 
 function onDblClickCatalog(row, col)
 {
-    cartTo(idxToPk(row-1), grid2);
+    putCart(idxToPk(row-1), grid2);
 }
