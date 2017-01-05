@@ -1,4 +1,3 @@
-
 let grid1;
 let grid2;
 let canvas;
@@ -28,6 +27,9 @@ $(window).on("load", function()
 
     grid1.attachEvent("onRowSelect", onSelectCatalog);
     grid1.attachEvent("onRowDblClicked", onDblClickCatalog);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawFrame(ctx);
 });
 
 

@@ -33,7 +33,7 @@ function serializeCart(arr)
 
 function unserializeCart(str)
 {
-    let cart [];
+    let cart = [];
 
     for(let i=0; i<str.length/6; ++i) {
         //console.log(str.substring(i*6,i*6+6));
@@ -92,4 +92,26 @@ function unserializeCart(str)
     }
 
     return cart;
+}
+
+
+//example
+//input : [100, 101, 102, 200, 300, 301]
+//output : [100, 3, 200, 1, 300, 2]
+function mergeNum(arr)
+{
+    if(arr.length == 0)
+        return [];
+
+    var result = [[arr[0],1]];
+    var prev = arr[0];
+
+    for(var i=1; i<arr.length; i++) {
+        if(arr[i]-prev == 1)
+            ++result[result.length-1][1];
+        else
+            result.push([arr[i], 1]);
+        prev = arr[i];
+    }
+    return result;
 }
