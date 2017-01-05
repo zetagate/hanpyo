@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+canvas {
+    width: 484px;
+    height: 645px;
+}
+
 #gridBox {
     float: left;
     width: auto;
