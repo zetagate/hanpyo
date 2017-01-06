@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="libs/dhtmlx/skins/web/dhtmlxgrid.css"/>
 	<link rel="stylesheet" type="text/css" href="main.css"/>
 
+	<script src="iecheck.js"></script>
 	<script src="libs/jquery-3.1.1.slim.min.js"></script>
 	<script src="libs/dhtmlx/codebase/dhtmlxgrid.js"></script>
 	<script src="dbt/dbt5.jsd"></script>
@@ -20,6 +21,21 @@
 
 	<body>
 		<div id="gridBox">
+			<input type="text" id="filter" size=20 placeholder="검색...">
+			<button type="button" id="btnEnter">검색</button>
+			<select id="selDep">
+				<option value="">개설학부</option>
+				<option value="컴퓨터">컴퓨터</option>
+				<option value="전기">전전통</option>
+				<option value="에너지">에신화</option>
+				<option value="산업경">산경</option>
+				<option value="메카트">메카</option>
+				<option value="기계공">기계</option>
+				<option value="디자인">디공,건축</option>
+				<option value="문리H">문리HRD</option>
+
+			</select>
+	
 			<div id="grid1"></div>
 			<div id="grid2"></div>
 		</div>

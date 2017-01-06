@@ -3,6 +3,7 @@ let grid2;
 let canvas;
 let ctx;
 let cartList = [];
+let softLoaderInterval;
 
 const MIN_GRIDBOX_WIDTH = 230;
 const CANVAS_PADDING = 10;
@@ -10,6 +11,7 @@ const CANVAS_PADDING = 10;
 
 $(window).on("load", function()
 {
+
     canvas = $("#canvas")[0];
     ctx = canvas.getContext("2d");
 
@@ -63,9 +65,21 @@ function initGrid(grid)
 
 function loadCatalog(grid)
 {
-    for(let i=0; i<SUBJECT_DATA.length; ++i) {
-        addRow(grid1, i, i+1);
-    }
+    grid.clearAll();
+    let k=0;
+
+    clearInterval(softLoaderInterval);
+    softLoaderInterval = setInterval(function()
+    {
+        if(k*100 >= SUBJECT_DATA.length) {
+            clearInterval(softLoaderInterval);
+            return;
+        }
+        for(let i=k*100; i<(k+1)*100 && i<SUBJECT_DATA.length; i++) {
+            addRow(grid, i, i+1);
+        }
+        ++k;
+    }, 50);
 }
 
 
@@ -109,8 +123,6 @@ function putCart(pk, grid)
     cartList.push(pk);
     addRow(grid2, pkToIdx(pk), cartList.length+1);
 }
-
-
 
 
 
