@@ -10,6 +10,7 @@ const CANVAS_PADDING = 10;
 
 $(window).on("load", function()
 {
+
     canvas = $("#canvas")[0];
     ctx = canvas.getContext("2d");
 
@@ -109,8 +110,6 @@ function putCart(pk, grid)
     cartList.push(pk);
     addRow(grid2, pkToIdx(pk), cartList.length+1);
 }
-
-
 
 
 
