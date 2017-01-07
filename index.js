@@ -2,7 +2,7 @@ let grid1;
 let grid2;
 let canvas;
 let ctx;
-let cartList = [];
+let cartedList = [];
 let softLoaderInterval;
 
 const MIN_GRIDBOX_WIDTH = 230;
@@ -32,7 +32,15 @@ $(window).on("load", function()
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFrame(ctx);
+
+
+    $("#btnShare").on("click", function() {
+        let popup = window.open(
+            "https://www.facebook.com/sharer/sharer.php?u=v2.hanpyo.com/s?test=3",
+        "pop", "width=600, height=400, scrollbars=no");
+    });
 });
+
 
 
 function setSizes()
@@ -118,10 +126,10 @@ function pkToIdx(pk)
 }
 
 
-function putCart(pk, grid)
+function cartItem(pk, grid)
 {
-    cartList.push(pk);
-    addRow(grid2, pkToIdx(pk), cartList.length+1);
+    cartedList.push(pk);
+    addRow(grid2, pkToIdx(pk), cartedList.length+1);
 }
 
 
@@ -146,5 +154,5 @@ function onSelectCatalog(row, col)
 
 function onDblClickCatalog(row, col)
 {
-    putCart(idxToPk(row-1), grid2);
+    cartItem(idxToPk(row-1), grid2);
 }
