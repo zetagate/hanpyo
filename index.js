@@ -29,16 +29,16 @@ $(window).on("load", function()
 
     grid1.attachEvent("onRowSelect", onSelectCatalog);
     grid1.attachEvent("onRowDblClicked", onDblClickCatalog);
+    grid2.attachEvent("onRowSelect", onSelectCart);
+    grid2.attachEvent("onRowDblClicked", onDblClickCart);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFrame(ctx);
 
-
-    $("#btnShare").on("click", function() {
-        let popup = window.open(
-            "https://www.facebook.com/sharer/sharer.php?u=v2.hanpyo.com/s?test=3",
-        "pop", "width=600, height=400, scrollbars=no");
-    });
+    $("#btnShare").on("click", onClickBtnShare);
+    $("#btnCart").on("click", onClickBtnCart);
+    $("#btnUncart").on("click", onClickBtnUncart);
+    $("#btnUncartAll").on("click", onClickBtnUncartAll);
 });
 
 
@@ -67,7 +67,6 @@ function initGrid(grid)
     grid.setEditable(false);
     dhtmlxEvent(window, "resize", function(){grid.setSizes();});
     grid.init();
-
 }
 
 
@@ -107,29 +106,21 @@ function addRow(grid, idx, row)
 }
 
 
-function idxToPk(idx)
-{
-    return SUBJECT_DATA[idx][0] + SUBJECT_DATA[idx][3];
-}
-
-
-function pkToIdx(pk)
-{
-    let cod = pk.substring(0,6);
-    let cls = pk.substring(6,8);
-    for(let i in SUBJECT_DATA) {
-        if(cod == SUBJECT_DATA[i][0] && cls == SUBJECT_DATA[i][3]) {
-            return i;
-        }
-    }
-    return -1;
-}
-
-
 function cartItem(pk, grid)
 {
     cartedList.push(pk);
-    addRow(grid2, pkToIdx(pk), cartedList.length+1);
+    addRow(grid, pkToIdx(pk), cartedList.length+1);
+}
+
+
+function uncartItem(pk, grid)
+{
+    for(let i in cartedList) {
+        if(cartedList[i] == pk) {
+            cartedList.splice(i, 1);
+        }
+    }
+    grid.deleteSelectedRows();
 }
 
 
@@ -155,4 +146,43 @@ function onSelectCatalog(row, col)
 function onDblClickCatalog(row, col)
 {
     cartItem(idxToPk(row-1), grid2);
+}
+
+
+function onSelectCart(row, col)
+{
+
+}
+
+
+function onDblClickCart(row, col)
+{
+    uncartItem(idxToPk(row-1), grid2);
+}
+
+
+function onClickBtnShare()
+{
+    let popup = window.open(
+        "https://www.facebook.com/sharer/sharer.php?u=v2.hanpyo.com/s?test=3",
+    "pop", "width=600, height=400, scrollbars=no");
+}
+
+
+function onClickBtnCart()
+{
+    cartItem(idxToPk(grid1.getSelectedId()-1), grid2);
+}
+
+
+function onClickBtnUncart()
+{
+    uncartItem(idxToPk(grid2.getSelectedId()-1), grid2);
+}
+
+
+function onClickBtnUncartAll()
+{
+    cartedList = [];
+    grid2.clearAll();
 }

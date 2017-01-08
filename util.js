@@ -1,3 +1,22 @@
+function idxToPk(idx)
+{
+    return SUBJECT_DATA[idx][0] + SUBJECT_DATA[idx][3];
+}
+
+
+function pkToIdx(pk)
+{
+    let cod = pk.substring(0,6);
+    let cls = pk.substring(6,8);
+    for(let i in SUBJECT_DATA) {
+        if(cod == SUBJECT_DATA[i][0] && cls == SUBJECT_DATA[i][3]) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
 function serializeCart(arr)
 {
     let ret = "";
@@ -30,6 +49,7 @@ function serializeCart(arr)
     });
     return ret;
 }
+
 
 function unserializeCart(str)
 {
