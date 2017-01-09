@@ -24,7 +24,13 @@ canvas {
     background-color: white !important;
 }
 
-#canvas {
+#canvasBox {
     float: left;
-    border: 1px solid #000000;
+}
+
+#header {
+}
+
+#footer {
+    clear: left;
 }

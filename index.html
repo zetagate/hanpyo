@@ -20,8 +20,12 @@
 </head>
 
 	<body>
+		<div id="header">
+			<h1>공사중입니다.</h1>
+		</div>
+
 		<div id="gridBox">
-			<input type="text" id="filter" size=20 placeholder="검색...">
+			<input type="text" id="filter" size=14 placeholder="검색...">
 			<button type="button" id="btnEnter">검색</button>
 			<select id="selDep">
 				<option value="">개설학부</option>
@@ -33,12 +37,28 @@
 				<option value="기계공">기계</option>
 				<option value="디자인">디공,건축</option>
 				<option value="문리H">문리HRD</option>
-
 			</select>
-	
+			<button type="button" id="btnCart">과목담기</button>
+
 			<div id="grid1"></div>
+
+			<button type="button" id="btnUncart">과목빼기</button>
+			<button type="button" id="btnUncartAll">초기화</button>
+
+
 			<div id="grid2"></div>
 		</div>
-		<canvas id="canvas" width=484 height=645></canvas>
+		<div id="canvasBox">
+			<button type="button" id="btnInfo">도움말</button>
+			<button type="button" id="btnSave">저장</button>
+			<button type="button" id="btnLoad">로드</button>
+			<button type="button" id="btnShare">Facebook공유</button>
+			<br>
+			<canvas id="canvas" width=484 height=645></canvas>
+		</div>
+
+		<div id="footer">
+			<h1>하단</h1>
+		</div>
 	</body>
 </html>
