@@ -108,8 +108,34 @@ function addRow(grid, idx, row)
 
 function cartItem(pk, grid)
 {
+
+    for(let i in cartedList) {
+        if(cartedList[i] == pk) {
+            alert("중복된 과목입니다.");
+            return;
+        }
+    }
+
+    let db = SUBJECT_DATA;
+    for(var i=0; i<cartedList.length; i++) {
+        let jTarget = db[pkToIdx(cartedList[i])][11];
+        let jLen = jTarget.length;
+        for(var j=0; j<jLen; j++) {
+            let kTarget = db[pkToIdx(pk)][11];
+            let kLen = kTarget.length;
+            for(var k=0; k<kLen; k++) {
+                if(jTarget[j] == kTarget[k]) {
+                    alert("시간 중복");
+                    console.log(jTarget, kTarget);
+                    return;
+                }
+            }
+        }
+    }
+
     cartedList.push(pk);
     addRow(grid, pkToIdx(pk), cartedList.length+1);
+
 }
 
 
@@ -122,7 +148,6 @@ function uncartItem(pk, grid)
     }
     grid.deleteSelectedRows();
 }
-
 
 
 //*********************
