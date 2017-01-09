@@ -32,7 +32,7 @@ $(window).on("load", function()
     grid2.attachEvent("onRowSelect", onSelectCart);
     grid2.attachEvent("onRowDblClicked", onDblClickCart);
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawClear(ctx, canvas.width, canvas.height);
     drawFrame(ctx);
 
     $("#btnShare").on("click", onClickBtnShare);
@@ -118,15 +118,16 @@ function cartItem(pk, grid)
 
     let db = SUBJECT_DATA;
     for(var i=0; i<cartedList.length; i++) {
-        let jTarget = db[pkToIdx(cartedList[i])][11];
-        let jLen = jTarget.length;
+        let jTarget = db[pkToIdx(cartedList[i])];
+        let jLen = jTarget[11].length;
         for(var j=0; j<jLen; j++) {
-            let kTarget = db[pkToIdx(pk)][11];
-            let kLen = kTarget.length;
+            let kTarget = db[pkToIdx(pk)];
+            let kLen = kTarget[11].length;
             for(var k=0; k<kLen; k++) {
-                if(jTarget[j] == kTarget[k]) {
-                    alert("시간 중복");
-                    console.log(jTarget, kTarget);
+                if(jTarget[11][j] == kTarget[11][k]) {
+                    let str = "시간이 중복됩니다!\n"+kTarget[1]+" 과목이 "+
+                                jTarget[1]+" 과목과 충돌합니다.";
+                    alert(str);
                     return;
                 }
             }
@@ -134,8 +135,8 @@ function cartItem(pk, grid)
     }
 
     cartedList.push(pk);
-    addRow(grid, pkToIdx(pk), cartedList.length+1);
-
+    let idx = pkToIdx(pk);
+    addRow(grid, idx, idx+1);
 }
 
 
@@ -144,6 +145,7 @@ function uncartItem(pk, grid)
     for(let i in cartedList) {
         if(cartedList[i] == pk) {
             cartedList.splice(i, 1);
+            break;
         }
     }
     grid.deleteSelectedRows();
@@ -164,7 +166,15 @@ window.onresize = function()
 
 function onSelectCatalog(row, col)
 {
+    drawClear(ctx, canvas.width, canvas.height);
+    drawFrame(ctx);
+    drawSelection(ctx, mergeNum(SUBJECT_DATA[row-1][11]), 5);
 
+    for(let i in SUBJECT_DATA) {
+        if(SUBJECT_DATA[i][0] == SUBJECT_DATA[row-1][0]) {
+            drawSelection(ctx, mergeNum(SUBJECT_DATA[i][11]), 2);
+        }
+    }
 }
 
 

@@ -14,6 +14,13 @@ let TIME_NAME = ["01A","01B","02A","02B","03A","03B","04A","04B","05A","05B","06
 let CLOCK_NAME = ["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"];
 let WEEK_NAME = ["월요일", "화요일", "수요일", "목요일", "금요일"];
 
+
+function drawClear(ctx, w, h)
+{
+    ctx.clearRect(0, 0, w, h);
+}
+
+
 function drawFrame(ctx)
 {
     let xs;
@@ -60,5 +67,33 @@ function drawFrame(ctx)
         ctx.rect(xs, ys+H_C, W_C, H_C*2);
     }
 
+    ctx.stroke();
+}
+
+
+function drawSelection(ctx, times, thickness)
+{
+
+    let xs;
+    let ys;
+
+    ctx.beginPath();
+    ctx.lineWidth = thickness;
+    ctx.strokeStyle="#2244BB";
+
+    if(times.length == 0) return;
+    for(var i=0; i<times.length; i++) {
+        var tgt = times[i][0];
+        if(tgt%100<17) {
+            xs = MGN + W_AX + Math.floor(tgt/100)*W_C;
+            ys = MGN + H_AX + (tgt%100)*H_C;
+            ctx.rect(xs, ys, W_C, H_C*times[i][1]);
+        }
+        else {
+            xs = MGN + W_AX + Math.floor(tgt/100)*W_C;
+            ys = MGN + H_AX + 18*H_C;
+            ctx.rect(xs, ys, W_C, H_C*2);
+        }
+    }
     ctx.stroke();
 }

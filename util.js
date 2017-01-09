@@ -10,7 +10,7 @@ function pkToIdx(pk)
     let cls = pk.substring(6,8);
     for(let i in SUBJECT_DATA) {
         if(cod == SUBJECT_DATA[i][0] && cls == SUBJECT_DATA[i][3]) {
-            return i;
+            return Number(i);
         }
     }
     return -1;
