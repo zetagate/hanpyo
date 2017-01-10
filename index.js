@@ -1,13 +1,27 @@
-let grid1;
-let grid2;
-let canvas;
-let ctx;
-let cartedList = [];
-let softLoaderInterval;
+var grid1;
+var grid2;
+var canvas;
+var ctx;
+var cartedList = [];
+var softLoaderInterval;
 
-const MIN_GRIDBOX_WIDTH = 230;
-const CANVAS_PADDING = 10;
+var MIN_GRIDBOX_WIDTH = 230;
+var CANVAS_PADDING = 10;
 
+var COOKIE_NAME = "v2017001";
+
+var D_COD = 0;
+var D_KOR = 1;
+var D_CLS = 3;
+var D_PRO = 7;
+var D_TAR = 6;
+var D_CRD = 2;
+var D_DCR = 9;
+var D_ENG = 8;
+var D_ELR = 10;
+var D_CAP = 4;
+var D_DEP = 5;
+var D_TME = 11;
 
 $(window).on("load", function()
 {
@@ -25,7 +39,7 @@ $(window).on("load", function()
     grid1.setSizes();
     grid2.setSizes();
 
-    loadCatalog(grid1);
+    loadCatalog(grid1, [""]);
 
     grid1.attachEvent("onRowSelect", onSelectCatalog);
     grid1.attachEvent("onRowDblClicked", onDblClickCatalog);
@@ -39,14 +53,26 @@ $(window).on("load", function()
     $("#btnCart").on("click", onClickBtnCart);
     $("#btnUncart").on("click", onClickBtnUncart);
     $("#btnUncartAll").on("click", onClickBtnUncartAll);
+    $("#btnEnter").on("click", onClickBtnEnter);
+    $("#btnInfo").on("click", onClickBtnInfo);
+    $("#btnSave").on("click", onClickBtnSave);
+    $("#canvas").on("mouseover", onActCanvas);
+    $("#canvas").on("click", onActCanvas);
+    $("#canvas").on("contextmenu", onActCanvas);
+
+
+    $("#comboDep").change(onSelectDep);
+    $("#filter").change(onChangeFilter);
+
+    loadCookie();
 });
 
 
 
 function setSizes()
 {
-    let docuWidth = $(document).width();
-    let size = docuWidth - (canvas.width+CANVAS_PADDING);
+    var docuWidth = $(document).width();
+    var size = docuWidth - (canvas.width+CANVAS_PADDING);
     if(size > MIN_GRIDBOX_WIDTH) {
         $(gridBox).width(docuWidth - canvas.width - 3*CANVAS_PADDING);
     }
@@ -70,10 +96,18 @@ function initGrid(grid)
 }
 
 
-function loadCatalog(grid)
+function loadCatalog(grid, filter)
 {
+
+    var k = 0;
+    var fLen = filter.length;
+    var keyword = filter[0].toUpperCase();
+    var delay;
+
+    if(fLen == 1) delay = 60;
+    else delay = 2;
+
     grid.clearAll();
-    let k=0;
 
     clearInterval(softLoaderInterval);
     softLoaderInterval = setInterval(function()
@@ -82,26 +116,45 @@ function loadCatalog(grid)
             clearInterval(softLoaderInterval);
             return;
         }
-        for(let i=k*100; i<(k+1)*100 && i<SUBJECT_DATA.length; i++) {
-            addRow(grid, i, i+1);
+        for(var i=k*100; i<(k+1)*100 && i<SUBJECT_DATA.length; i++) {
+            if(fLen == 1) {
+                addRow(grid, i, i+1);
+            }
+            else {
+                for(var j=1; j<fLen; j++) {
+                    if(SUBJECT_DATA[i][filter[j]].toUpperCase().indexOf(keyword)
+                    != -1) {
+                        addRow(grid, i, i+1);
+                        break;
+                    }
+                }
+            }
         }
         ++k;
-    }, 50);
+    }, delay);
 }
 
 
 function addRow(grid, idx, row)
 {
-    let cod = SUBJECT_DATA[idx][0]; //code
-    let ttk = SUBJECT_DATA[idx][1]; //title korean
-    let cls = SUBJECT_DATA[idx][3]; //class
-    let prf = SUBJECT_DATA[idx][7]; //professor
-    let tar = SUBJECT_DATA[idx][6]; //target
-    let crd = SUBJECT_DATA[idx][2]; //credits
-    let dsg = SUBJECT_DATA[idx][9]; //design credits
-    let spe = SUBJECT_DATA[idx][8] + SUBJECT_DATA[idx][10];//special information
-    let cap = SUBJECT_DATA[idx][4]; //capacity
-    let dep = SUBJECT_DATA[idx][5]; //depeartment
+    var cod = SUBJECT_DATA[idx][D_COD]; //code
+    var ttk = SUBJECT_DATA[idx][D_KOR]; //title korean
+    var cls = SUBJECT_DATA[idx][D_CLS]; //class
+    var prf = SUBJECT_DATA[idx][D_PRO]; //professor
+    var tar = SUBJECT_DATA[idx][D_TAR]; //target
+    var crd = SUBJECT_DATA[idx][D_CRD]; //credits
+    var dsg = SUBJECT_DATA[idx][D_DCR]; //design credits
+    var spe = "";
+    var cap = SUBJECT_DATA[idx][D_CAP]; //capacity
+    var dep = SUBJECT_DATA[idx][D_DEP]; //depeartment
+
+    if(SUBJECT_DATA[idx][D_ENG] == "Y" && SUBJECT_DATA[idx][D_ELR] == "Y")
+        spe += "영+e";
+    else if(SUBJECT_DATA[idx][D_ENG] == "Y")
+        spe += "영강";
+    else if(SUBJECT_DATA[idx][D_ELR] == "Y")
+        spe += "이러닝";
+
     grid.addRow(row, [cod, ttk, cls, prf, tar, crd, dsg, spe, cap, dep]);
 }
 
@@ -109,24 +162,24 @@ function addRow(grid, idx, row)
 function cartItem(pk, grid)
 {
 
-    for(let i in cartedList) {
+    for(var i in cartedList) {
         if(cartedList[i] == pk) {
             alert("중복된 과목입니다.");
             return;
         }
     }
 
-    let db = SUBJECT_DATA;
+    var db = SUBJECT_DATA;
     for(var i=0; i<cartedList.length; i++) {
-        let jTarget = db[pkToIdx(cartedList[i])];
-        let jLen = jTarget[11].length;
+        var jTarget = db[pkToIdx(cartedList[i])];
+        var jLen = jTarget[D_TME].length;
         for(var j=0; j<jLen; j++) {
-            let kTarget = db[pkToIdx(pk)];
-            let kLen = kTarget[11].length;
+            var kTarget = db[pkToIdx(pk)];
+            var kLen = kTarget[D_TME].length;
             for(var k=0; k<kLen; k++) {
-                if(jTarget[11][j] == kTarget[11][k]) {
-                    let str = "시간이 중복됩니다!\n"+kTarget[1]+" 과목이 "+
-                                jTarget[1]+" 과목과 충돌합니다.";
+                if(jTarget[D_TME][j] == kTarget[D_TME][k]) {
+                    var str = "시간이 중복됩니다!\n"+kTarget[D_KOR]+" 과목이 "+
+                                jTarget[D_KOR]+" 과목과 충돌합니다.";
                     alert(str);
                     return;
                 }
@@ -135,21 +188,66 @@ function cartItem(pk, grid)
     }
 
     cartedList.push(pk);
-    let idx = pkToIdx(pk);
+    var idx = pkToIdx(pk);
     addRow(grid, idx, idx+1);
+
+    document.cookie = COOKIE_NAME+"="+serializeCart(cartedList)+";";
 }
 
 
 function uncartItem(pk, grid)
 {
-    for(let i in cartedList) {
+    for(var i in cartedList) {
         if(cartedList[i] == pk) {
             cartedList.splice(i, 1);
             break;
         }
     }
-    grid.deleteSelectedRows();
+    grid.devareSelectedRows();
+
+    document.cookie = COOKIE_NAME+"="+serializeCart(cartedList)+";";
 }
+
+
+function redrawCanvas(ctx)
+{
+    var totalCredits = 0;
+
+    drawClear(ctx, canvas.width, canvas.height);
+    drawFrame(ctx);
+    drawCartList(ctx, SUBJECT_DATA, cartedList);
+
+    for(var i in cartedList) {
+        var sbj = SUBJECT_DATA[pkToIdx(cartedList[i])];
+        totalCredits += Number(sbj[D_CRD]);
+    }
+
+    $("#totalCredits")[0].innerHTML = "수강학점 : " + totalCredits;
+}
+
+
+function loadCookie()
+{
+    var cookieArr = document.cookie.split(";");
+    for(var i=0; i<cookieArr.length; i++) {
+        if(cookieArr[i].indexOf(COOKIE_NAME) != -1) {
+        //cookieArr can has 2 cases.
+        //["target=value", " not=value"] //not including space
+        //["not=value", " target=value"] //including space
+            var cookieStr = cookieArr[i].substr(cookieArr[i].indexOf(COOKIE_NAME)
+                            + COOKIE_NAME.length+1);
+            if(cookieStr.length > 0) {
+                var temp = unserializeCart(cookieStr);
+                for(var j in temp) {
+                    cartItem(temp[j], grid2);
+                }
+                redrawCanvas(ctx);
+            }
+            break;
+        }
+    }
+}
+
 
 
 //*********************
@@ -166,13 +264,13 @@ window.onresize = function()
 
 function onSelectCatalog(row, col)
 {
-    drawClear(ctx, canvas.width, canvas.height);
-    drawFrame(ctx);
-    drawSelection(ctx, mergeNum(SUBJECT_DATA[row-1][11]), 5);
+    redrawCanvas(ctx);
+    drawSelection(ctx, mergeNum(SUBJECT_DATA[row-1][D_TME]), 5);
 
-    for(let i in SUBJECT_DATA) {
-        if(SUBJECT_DATA[i][0] == SUBJECT_DATA[row-1][0]) {
-            drawSelection(ctx, mergeNum(SUBJECT_DATA[i][11]), 2);
+    //same code, different class
+    for(var i in SUBJECT_DATA) {
+        if(SUBJECT_DATA[i][D_COD] == SUBJECT_DATA[row-1][D_COD]) {
+            drawSelection(ctx, mergeNum(SUBJECT_DATA[i][D_TME]), 2);
         }
     }
 }
@@ -181,6 +279,7 @@ function onSelectCatalog(row, col)
 function onDblClickCatalog(row, col)
 {
     cartItem(idxToPk(row-1), grid2);
+    redrawCanvas(ctx);
 }
 
 
@@ -193,12 +292,13 @@ function onSelectCart(row, col)
 function onDblClickCart(row, col)
 {
     uncartItem(idxToPk(row-1), grid2);
+    redrawCanvas(ctx);
 }
 
 
 function onClickBtnShare()
 {
-    let popup = window.open(
+    var popup = window.open(
         "https://www.facebook.com/sharer/sharer.php?u=v2.hanpyo.com/s?test=3",
     "pop", "width=600, height=400, scrollbars=no");
 }
@@ -206,13 +306,21 @@ function onClickBtnShare()
 
 function onClickBtnCart()
 {
-    cartItem(idxToPk(grid1.getSelectedId()-1), grid2);
+    var sel = Number(grid1.getSelectedId());
+    if(sel > 0) {
+        cartItem(idxToPk(sel-1), grid2);
+        redrawCanvas(ctx);
+    }
 }
 
 
 function onClickBtnUncart()
 {
-    uncartItem(idxToPk(grid2.getSelectedId()-1), grid2);
+    var sel = Number(grid2.getSelectedId());
+    if(sel > 0) {
+        uncartItem(idxToPk(sel-1), grid2);
+    }
+    redrawCanvas(ctx);
 }
 
 
@@ -220,4 +328,56 @@ function onClickBtnUncartAll()
 {
     cartedList = [];
     grid2.clearAll();
+    redrawCanvas(ctx);
+    document.cookie = COOKIE_NAME+"=;";
+}
+
+
+function onSelectDep(e)
+{
+    loadCatalog(grid1, [e.target.value, D_DEP]);
+}
+
+
+function onChangeFilter()
+{
+    $("#comboDep")[0].selectedIndex = 0;
+    if($("#filter")[0].value.length > 0) {
+        loadCatalog(grid1, [$("#filter")[0].value, D_COD, D_PRO, D_KOR]);
+    }
+    else {
+        loadCatalog(grid1, [""]);
+    }
+}
+
+
+function onClickBtnEnter()
+{
+    onChangeFilter();
+}
+
+
+function onClickBtnInfo()
+{
+    openPopup("info.html", 400, 600);
+}
+
+
+function onClickBtnSave()
+{
+    var dt = canvas.toDataURL("image/png");
+
+    if ("download" in $("#btnSave").get(0)) {
+        this.href = dt;
+    }
+    else {
+        var p = openPopup("down.html", 400, 500);
+        p.document.write("<img src='"+dt+"'alt='from canvas'");
+    }
+}
+
+
+function onActCanvas()
+{
+    redrawCanvas(ctx);
 }

@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>공사중입니다</title>
+	<title>한표 :: 한기대 시간표 웹</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
+	<link rel="shortcut icon" type="image/png" href="favi.png">
 	<link rel="stylesheet" type="text/css" href="libs/dhtmlx/skins/web/dhtmlxgrid.css"/>
 	<link rel="stylesheet" type="text/css" href="main.css"/>
 
@@ -21,13 +23,14 @@
 
 	<body>
 		<div id="header">
-			<h1>공사중입니다.</h1>
+			<img src="orange.png" width="140" height="auto">
+			<h1>공사중입니다. 아직 시간표 안올라옴</h1>
 		</div>
 
 		<div id="gridBox">
 			<input type="text" id="filter" size=14 placeholder="검색...">
 			<button type="button" id="btnEnter">검색</button>
-			<select id="selDep">
+			<select id="comboDep">
 				<option value="">개설학부</option>
 				<option value="컴퓨터">컴퓨터</option>
 				<option value="전기">전전통</option>
@@ -44,15 +47,15 @@
 
 			<button type="button" id="btnUncart">과목빼기</button>
 			<button type="button" id="btnUncartAll">초기화</button>
-
+			<div id="totalCredits">신청학점 : 0</div>
 
 			<div id="grid2"></div>
 		</div>
 		<div id="canvasBox">
 			<button type="button" id="btnInfo">도움말</button>
-			<button type="button" id="btnSave">저장</button>
-			<button type="button" id="btnLoad">로드</button>
-			<button type="button" id="btnShare">Facebook공유</button>
+			<a id="btnSave" download="table.png">
+				<button type="button">이미지 저장</button></a>
+			<button type="button" id="btnShare">Facebook 공유</button>
 			<br>
 			<canvas id="canvas" width=484 height=645></canvas>
 		</div>

@@ -1,1 +1,1 @@
-window.location.replace("http://hanpyo.com?test=200");
+window.location.replace("http://hanpyo.com?c=0");

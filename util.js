@@ -6,9 +6,9 @@ function idxToPk(idx)
 
 function pkToIdx(pk)
 {
-    let cod = pk.substring(0,6);
-    let cls = pk.substring(6,8);
-    for(let i in SUBJECT_DATA) {
+    var cod = pk.substring(0,6);
+    var cls = pk.substring(6,8);
+    for(var i in SUBJECT_DATA) {
         if(cod == SUBJECT_DATA[i][0] && cls == SUBJECT_DATA[i][3]) {
             return Number(i);
         }
@@ -19,9 +19,9 @@ function pkToIdx(pk)
 
 function serializeCart(arr)
 {
-    let ret = "";
+    var ret = "";
     arr.forEach(function(entry){
-        let sum = 0;
+        var sum = 0;
         sum += (entry[0].charCodeAt()-65) * 26*26*100000;
         sum += (entry[1].charCodeAt()-65) * 26*100000;
         sum += (entry[2].charCodeAt()-65) * 100000;
@@ -32,8 +32,8 @@ function serializeCart(arr)
         sum += Number(entry[7]);
         //console.log(sum);
 
-        for(let i=0; i<6; ++i) {
-            let rest = sum%62;
+        for(var i=0; i<6; ++i) {
+            var rest = sum%62;
             if(rest < 26) {
                 ret += String.fromCharCode(rest+65);
             }
@@ -53,17 +53,17 @@ function serializeCart(arr)
 
 function unserializeCart(str)
 {
-    let cart = [];
+    var cart = [];
 
-    for(let i=0; i<str.length/6; ++i) {
+    for(var i=0; i<str.length/6; ++i) {
         //console.log(str.substring(i*6,i*6+6));
-        let sum = 0;
-        let item = str.substring(i*6,i*6+6);
-        let code = "";
-        let quot;
+        var sum = 0;
+        var item = str.substring(i*6,i*6+6);
+        var code = "";
+        var quot;
 
-        for(let i=0; i<6; ++i) {
-            let cc = item[i].charCodeAt();
+        for(var i=0; i<6; ++i) {
+            var cc = item[i].charCodeAt();
             if(cc >= 65 && cc <= 90)
                 sum += (cc-65)*Math.pow(62, i);
             else if(cc >= 97 && cc <= 122)
@@ -134,4 +134,13 @@ function mergeNum(arr)
         prev = arr[i];
     }
     return result;
+}
+
+
+function openPopup(url, w, h)
+{
+    var wd = window.open(url,"","height="+h+",width="+w+
+        ",left=20,top=20,resizable=yes,scrollbars=yes,toolbar=no,menubar=no"+
+        ",location=no,directories=no,status=no");
+    return wd;
 }
