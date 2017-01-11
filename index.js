@@ -388,7 +388,7 @@ function onClickBtnSave()
 {
     var dt = canvas.toDataURL("image/png");
 
-    if (1==0 && ("download" in $("#btnSave").get(0)) && !isEdge()) {
+    if (("download" in $("#btnSave").get(0)) && !isEdge()) {
         this.href = dt;
     }
     else {
