@@ -29,8 +29,15 @@ canvas {
 }
 
 #header {
+    font-family: "맑은 고딕", "Malgun Gothic", "돋움", "Dotum";
 }
 
 #footer {
     clear: left;
+    font-family: "맑은 고딕", "Malgun Gothic", "돋움", "Dotum";
+}
+
+#totalCredits {
+    display: inline;
+    font-size: 0.8em
 }
