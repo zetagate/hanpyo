@@ -392,18 +392,10 @@ function onClickBtnSave()
         this.href = dt;
     }
     else {
-        var p = openPopup("down.html", 505, 705);
-        $(p.document).ready(function() {
-            p.document.write(
-                "<div id='header' style='text-align:center;font-family:맑은 고딕,Malgun Gothic,돋움,Dotum;font-weight:bold;'>"+
-                    "<p>자동다운로드를 지원하지 않는 브라우저입니다."+
-                    "<br>아래 그림을 직접 저장해주세요</p>"+
-                "</div>"+
-                "<div id='savingImg'></div>"
-            );
-            p.document.getElementById("savingImg").innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
-        });
-
+        alert("다운로드를 지원하지 않는 브라우저입니다.\n"+
+        "페이지 맨 아래에 그림을 추가로 생성하였습니다.\n"+
+        "그 이미지파일을 저장해주세요");
+        $("#svimg").html("<img src='"+dt+"'alt='from canvas'/>");
     }
 }
 
