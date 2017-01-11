@@ -60,11 +60,24 @@ $(window).on("load", function()
     $("#canvas").on("click", onActCanvas);
     $("#canvas").on("contextmenu", onActCanvas);
 
-
     $("#comboDep").change(onSelectDep);
     $("#filter").change(onChangeFilter);
 
-    loadCookie();
+
+    var variables = window.location.search;
+    if(variables.indexOf("c=0") == -1)
+        loadCookie();
+    else {
+        var vArr = window.location.search.split(/[&?]/);
+        for(var i in vArr) {
+            if(vArr[i].substr(0, 2) == "d=") {
+                loadCart(vArr[i].substr(2));
+                break;
+            }
+        }
+
+    }
+
 });
 
 
@@ -201,7 +214,7 @@ function uncartItem(pk, grid)
             break;
         }
     }
-    grid.devareSelectedRows();
+    grid.deleteSelectedRows();
 
     document.cookie = COOKIE_NAME+"="+serializeCart(cartedList)+";";
 }
@@ -224,6 +237,16 @@ function redrawCanvas(ctx)
 }
 
 
+function loadCart(str)
+{
+    var temp = unserializeCart(str);
+    for(var j in temp) {
+        cartItem(temp[j], grid2);
+    }
+    redrawCanvas(ctx);
+}
+
+
 function loadCookie()
 {
     var cookieArr = document.cookie.split(";");
@@ -235,16 +258,13 @@ function loadCookie()
             var cookieStr = cookieArr[i].substr(cookieArr[i].indexOf(COOKIE_NAME)
                             + COOKIE_NAME.length+1);
             if(cookieStr.length > 0) {
-                var temp = unserializeCart(cookieStr);
-                for(var j in temp) {
-                    cartItem(temp[j], grid2);
-                }
-                redrawCanvas(ctx);
+                loadCart(cookieStr);
             }
             break;
         }
     }
 }
+
 
 
 
@@ -298,7 +318,8 @@ function onDblClickCart(row, col)
 function onClickBtnShare()
 {
     var popup = window.open(
-        "https://www.facebook.com/sharer/sharer.php?u=v2.hanpyo.com/s?test=3",
+        "https://www.facebook.com/sharer/sharer.php?u=hanpyo.com/s?d="
+        + serializeCart(cartedList),
     "pop", "width=600, height=400, scrollbars=no");
 }
 
