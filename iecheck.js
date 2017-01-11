@@ -18,10 +18,19 @@ function isIE11()
 }
 
 
+function isEdge()
+{
+    if(navigator.userAgent.indexOf("Edge")!=-1) {
+        return true;
+    }
+    return false;
+}
+
+
 if(isIE()) {
     alert("인터넷 익스플로러 11 미만에서는\n사용할 수 없습니다.");
 }
 
 if(isIE11()) {
-    alert("인터넷 익스플로러에서는 느려서...\n다른 브라우저를 추천해요");
+    alert("인터넷 익스플로러에서는 느릴 수 있습니다.\n다른 브라우저를 추천합니다.");
 }
