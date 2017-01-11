@@ -392,10 +392,9 @@ function onClickBtnSave()
         this.href = dt;
     }
     else {
-        alert("다운로드를 지원하지 않는 브라우저입니다.\n"+
-        "페이지 맨 아래에 그림을 추가로 생성하였습니다.\n"+
-        "그 이미지파일을 저장해주세요");
-        $("#svimg").html("<img src='"+dt+"'alt='from canvas'/>");
+        var p = openPopup("down.html", 505, 705);
+        var div = p.document.getElementById("savingImg");
+        div.innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
     }
 }
 
