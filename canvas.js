@@ -5,7 +5,7 @@ var H_AX = 40; //axis
 var MGN = 2.5; //margin
 
 var COLOR_BG1 = "#FFFFFF";
-var COLOR_BG2 = "#FBFBFF";
+var COLOR_BG2 = "#FFFFFF";
 var COLOR_LINE = "#000000";
 var COLOR_TEXT = "#000000";
 var FONT_TEXT = "13px dotum";
