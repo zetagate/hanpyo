@@ -367,12 +367,13 @@ function onClickBtnSave()
 {
     var dt = canvas.toDataURL("image/png");
 
-    if ("download" in $("#btnSave").get(0)) {
+    if ("download" in $("#btnSave").get(0) && !isEdge()) {
         this.href = dt;
     }
     else {
-        var p = openPopup("down.html", 400, 500);
-        p.document.write("<img src='"+dt+"'alt='from canvas'");
+        var p = openPopup("down.html", 505, 705);
+        var div = p.document.getElementById("savingImg");
+        div.innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
     }
 }
 
