@@ -34,6 +34,8 @@ canvas {
 
 #footer {
     clear: left;
+    padding-top: 8px;
+    padding-bottom: 8px;
     font-family: "맑은 고딕", "Malgun Gothic", "돋움", "Dotum";
 }
 
