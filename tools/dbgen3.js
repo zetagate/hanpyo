@@ -31,8 +31,8 @@ function download(filename, text) {
 function doOpenFile() {
     var reader = new FileReader();
     reader.onload = function(e) {
-        let data = reader.result;
-        let output = processData(data);
+        var data = reader.result;
+        var output = processData(data);
         download("output.jsd", output);
         //console.log("res = " + reader.result);
     }
@@ -56,7 +56,7 @@ function processData(data)
      ...
      ];
      */
-    var output = "let SUBJECT_DATA = [\r\n";
+    var output = "var SUBJECT_DATA = [\r\n";
     for(var i=0; i<xmlData.length; i++) {
         var subject = xmlData[i];
         var obj = {};
@@ -71,11 +71,11 @@ function processData(data)
         }
         output += "["
         obj.tm = new Array();
-        for(let j=0; j<16; j++) {
-            let str = obj["tm"+(j+1)];
+        for(var j=0; j<16; j++) {
+            var str = obj["tm"+(j+1)];
             delete obj["tm"+(j+1)];
             if(!str || str.length<5) continue;
-            let tm = 0;
+            var tm = 0;
             tm += DAY_TIME[str.charAt(0)];
             tm += 2*(parseInt(str.substr(2,2)-1));
             tm += AB_TIME[str.charAt(4)];
