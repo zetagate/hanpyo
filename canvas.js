@@ -83,7 +83,7 @@ function drawSelection(ctx, times, thickness)
 
     ctx.beginPath();
     ctx.lineWidth = thickness;
-    ctx.strokeStyle="#2244BB";
+    ctx.strokeStyle="#DD2244";
 
     if(times.length == 0) return;
     for(var i=0; i<times.length; i++) {
