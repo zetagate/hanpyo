@@ -30,6 +30,8 @@ canvas {
 
 #header {
     font-family: "맑은 고딕", "Malgun Gothic", "돋움", "Dotum";
+    font-size: 1.0em;
+    padding-bottom: 5px;
 }
 
 #footer {
