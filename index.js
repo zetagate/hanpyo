@@ -174,6 +174,11 @@ function addRow(grid, idx, row)
 
 function cartItem(pk, grid)
 {
+    var idx = pkToIdx(pk);
+    if(idx == -1) {
+        alert("폐강되었거나, 데이터가 잘못된 과목입니다.");
+        return;
+    }
 
     for(var i in cartedList) {
         if(cartedList[i] == pk) {
@@ -201,7 +206,7 @@ function cartItem(pk, grid)
     }
 
     cartedList.push(pk);
-    var idx = pkToIdx(pk);
+
     addRow(grid, idx, idx+1);
 }
 
