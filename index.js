@@ -302,9 +302,11 @@ function onSelectCatalog(row, col)
 
 function onDblClickCatalog(row, col)
 {
-    cartItem(idxToPk(row-1), grid2);
+    var pk = idxToPk(row-1);
+    cartItem(pk, grid2);
     document.cookie = COOKIE_NAME+"="+serializeCart(cartedList)+";";
     redrawCanvas(ctx);
+    send(pk);
 }
 
 
@@ -341,9 +343,11 @@ function onClickBtnCart()
 {
     var sel = Number(grid1.getSelectedId());
     if(sel > 0) {
-        cartItem(idxToPk(sel-1), grid2);
+        var pk = idxToPk(sel-1);
+        cartItem(pk, grid2);
         document.cookie = COOKIE_NAME+"="+serializeCart(cartedList)+";";
         redrawCanvas(ctx);
+        send(pk);
     }
 }
 

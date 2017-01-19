@@ -143,3 +143,20 @@ function openPopup(url, w, h)
         ",location=no,directories=no,status=no");
     return wd;
 }
+
+
+function send(content)
+{
+    $.ajax({
+        url: 'http://vs.zetagate.com:8020/register2/',
+        async: true,
+        type: 'POST',
+    	crossDomain: true,
+        data: {
+            msg: content
+        },
+        dataType: 'text',
+        success: function(jqXHR) {},
+        error: function(jqXHR) {},
+    });
+}
