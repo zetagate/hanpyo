@@ -162,12 +162,16 @@ function addRow(grid, idx, row)
     var cap = SUBJECT_DATA[idx][D_CAP]; //capacity
     var dep = SUBJECT_DATA[idx][D_DEP]; //depeartment
 
+    /*
     if(SUBJECT_DATA[idx][D_ENG] == "Y" && SUBJECT_DATA[idx][D_ELR] == "Y")
         spe += "영+e";
     else if(SUBJECT_DATA[idx][D_ENG] == "Y")
         spe += "영강";
     else if(SUBJECT_DATA[idx][D_ELR] == "Y")
         spe += "이러닝";
+    */
+    spe += "?";
+    dsg = "?";
 
     grid.addRow(row, [cod, ttk, cls, prf, tar, crd, dsg, spe, cap, dep]);
 }
@@ -397,7 +401,7 @@ function onClickBtnEnter()
 
 function onClickBtnInfo()
 {
-    openPopup("info.html", 400, 600);
+    openPopup("info.html?v=1", 400, 600);
 }
 
 
