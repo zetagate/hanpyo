@@ -99,7 +99,7 @@ function setSizes()
 function initGrid(grid)
 {
     //grid.setImagePath("dhtmlx/skins/web/imgs/dhxgrid_terrace/");
-    grid.setHeader("코드,과목명,분반,교수님,대상,학점,설계,비고,정원,개설학부");
+    grid.setHeader("코드,과목명,분반,교수님,대상,학점,비고,정원,신청,개설학부");
     grid.setInitWidths("55,150,40,60,70,40,40,40,40,100");
     grid.setColAlign("left,left,left,left,left,left,left,left,left");
     grid.setColTypes("txt,txt,txt,txt,txt,txt,txt,txt,txt,txt");
@@ -157,23 +157,22 @@ function addRow(grid, idx, row)
     var prf = SUBJECT_DATA[idx][D_PRO]; //professor
     var tar = SUBJECT_DATA[idx][D_TAR]; //target
     var crd = SUBJECT_DATA[idx][D_CRD]; //credits
-    var dsg = SUBJECT_DATA[idx][D_DCR]; //design credits
     var spe = "";
     var cap = SUBJECT_DATA[idx][D_CAP]; //capacity
+    var dsg = SUBJECT_DATA[idx][D_DCR]; //design credits
     var dep = SUBJECT_DATA[idx][D_DEP]; //depeartment
 
-    /*
+
     if(SUBJECT_DATA[idx][D_ENG] == "Y" && SUBJECT_DATA[idx][D_ELR] == "Y")
         spe += "영+e";
     else if(SUBJECT_DATA[idx][D_ENG] == "Y")
         spe += "영강";
     else if(SUBJECT_DATA[idx][D_ELR] == "Y")
-        spe += "이러닝";
-    */
-    spe += "?";
-    dsg = "?";
+        spe += "e러닝";
 
-    grid.addRow(row, [cod, ttk, cls, prf, tar, crd, dsg, spe, cap, dep]);
+
+
+    grid.addRow(row, [cod, ttk, cls, prf, tar, crd, spe, cap, dsg, dep]);
 }
 
 
