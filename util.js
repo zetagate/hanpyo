@@ -147,6 +147,7 @@ function openPopup(url, w, h)
 
 function send(content)
 {
+    /*
     $.ajax({
         url: 'http://vs.zetagate.com:8020/register2/',
         async: true,
@@ -159,4 +160,5 @@ function send(content)
         success: function(jqXHR) {},
         error: function(jqXHR) {},
     });
+    */
 }
