@@ -50,6 +50,7 @@ $(window).on("load", function()
     drawFrame(ctx);
 
     $("#btnShare").on("click", onClickBtnShare);
+    $("#btnLinkShare").on("click", onClickBtnLinkShare);
     $("#btnCart").on("click", onClickBtnCart);
     $("#btnUncart").on("click", onClickBtnUncart);
     $("#btnUncartAll").on("click", onClickBtnUncartAll);
@@ -60,11 +61,24 @@ $(window).on("load", function()
     $("#canvas").on("click", onActCanvas);
     $("#canvas").on("contextmenu", onActCanvas);
 
-
     $("#comboDep").change(onSelectDep);
     $("#filter").change(onChangeFilter);
 
-    loadCookie();
+
+    var variables = window.location.search;
+    if(variables.indexOf("c=0") == -1)
+        loadCookie();
+    else {
+        var vArr = window.location.search.split(/[&?]/);
+        for(var i in vArr) {
+            if(vArr[i].substr(0, 2) == "d=") {
+                loadCart(vArr[i].substr(2));
+                break;
+            }
+        }
+
+    }
+
 });
 
 
@@ -85,7 +99,7 @@ function setSizes()
 function initGrid(grid)
 {
     //grid.setImagePath("dhtmlx/skins/web/imgs/dhxgrid_terrace/");
-    grid.setHeader("코드,과목명,분반,교수,대상,학점,설계,비고,정원,개설학부");
+    grid.setHeader("코드,과목명,분반,교수님,대상,학점,비고,정원,신청,개설학부");
     grid.setInitWidths("55,150,40,60,70,40,40,40,40,100");
     grid.setColAlign("left,left,left,left,left,left,left,left,left");
     grid.setColTypes("txt,txt,txt,txt,txt,txt,txt,txt,txt,txt");
@@ -143,24 +157,32 @@ function addRow(grid, idx, row)
     var prf = SUBJECT_DATA[idx][D_PRO]; //professor
     var tar = SUBJECT_DATA[idx][D_TAR]; //target
     var crd = SUBJECT_DATA[idx][D_CRD]; //credits
-    var dsg = SUBJECT_DATA[idx][D_DCR]; //design credits
     var spe = "";
     var cap = SUBJECT_DATA[idx][D_CAP]; //capacity
+    var dsg = SUBJECT_DATA[idx][D_DCR]; //design credits
     var dep = SUBJECT_DATA[idx][D_DEP]; //depeartment
+
 
     if(SUBJECT_DATA[idx][D_ENG] == "Y" && SUBJECT_DATA[idx][D_ELR] == "Y")
         spe += "영+e";
     else if(SUBJECT_DATA[idx][D_ENG] == "Y")
         spe += "영강";
     else if(SUBJECT_DATA[idx][D_ELR] == "Y")
-        spe += "이러닝";
+        spe += "e러닝";
 
-    grid.addRow(row, [cod, ttk, cls, prf, tar, crd, dsg, spe, cap, dep]);
+
+
+    grid.addRow(row, [cod, ttk, cls, prf, tar, crd, spe, cap, dsg, dep]);
 }
 
 
 function cartItem(pk, grid)
 {
+    var idx = pkToIdx(pk);
+    if(idx == -1) {
+        alert("폐강되었거나, 데이터가 잘못된 과목입니다.");
+        return;
+    }
 
     for(var i in cartedList) {
         if(cartedList[i] == pk) {
@@ -188,10 +210,8 @@ function cartItem(pk, grid)
     }
 
     cartedList.push(pk);
-    var idx = pkToIdx(pk);
-    addRow(grid, idx, idx+1);
 
-    document.cookie = COOKIE_NAME+"="+serializeCart(cartedList)+";";
+    addRow(grid, idx, idx+1);
 }
 
 
@@ -203,7 +223,7 @@ function uncartItem(pk, grid)
             break;
         }
     }
-    grid.devareSelectedRows();
+    grid.deleteSelectedRows();
 
     document.cookie = COOKIE_NAME+"="+serializeCart(cartedList)+";";
 }
@@ -226,6 +246,16 @@ function redrawCanvas(ctx)
 }
 
 
+function loadCart(str)
+{
+    var temp = unserializeCart(str);
+    for(var j in temp) {
+        cartItem(temp[j], grid2);
+    }
+    redrawCanvas(ctx);
+}
+
+
 function loadCookie()
 {
     var cookieArr = document.cookie.split(";");
@@ -237,16 +267,13 @@ function loadCookie()
             var cookieStr = cookieArr[i].substr(cookieArr[i].indexOf(COOKIE_NAME)
                             + COOKIE_NAME.length+1);
             if(cookieStr.length > 0) {
-                var temp = unserializeCart(cookieStr);
-                for(var j in temp) {
-                    cartItem(temp[j], grid2);
-                }
-                redrawCanvas(ctx);
+                loadCart(cookieStr);
             }
             break;
         }
     }
 }
+
 
 
 
@@ -278,8 +305,11 @@ function onSelectCatalog(row, col)
 
 function onDblClickCatalog(row, col)
 {
-    cartItem(idxToPk(row-1), grid2);
+    var pk = idxToPk(row-1);
+    cartItem(pk, grid2);
+    document.cookie = COOKIE_NAME+"="+serializeCart(cartedList)+";";
     redrawCanvas(ctx);
+    send(pk);
 }
 
 
@@ -299,8 +329,16 @@ function onDblClickCart(row, col)
 function onClickBtnShare()
 {
     var popup = window.open(
-        "https://www.facebook.com/sharer/sharer.php?u=v2.hanpyo.com/s?test=3",
+        "https://www.facebook.com/sharer/sharer.php?u=hanpyo.com/s?d="
+        + serializeCart(cartedList),
     "pop", "width=600, height=400, scrollbars=no");
+}
+
+
+function onClickBtnLinkShare()
+{
+    $("#svtxt").html("http://hanpyo.com/s?d="+serializeCart(cartedList));
+    alert("페이지 맨 하단의 주소를 복사하여 공유하세요.");
 }
 
 
@@ -308,8 +346,11 @@ function onClickBtnCart()
 {
     var sel = Number(grid1.getSelectedId());
     if(sel > 0) {
-        cartItem(idxToPk(sel-1), grid2);
+        var pk = idxToPk(sel-1);
+        cartItem(pk, grid2);
+        document.cookie = COOKIE_NAME+"="+serializeCart(cartedList)+";";
         redrawCanvas(ctx);
+        send(pk);
     }
 }
 
@@ -359,7 +400,7 @@ function onClickBtnEnter()
 
 function onClickBtnInfo()
 {
-    openPopup("info.html", 400, 600);
+    openPopup("info.html?v=1", 400, 600);
 }
 
 
@@ -367,7 +408,7 @@ function onClickBtnSave()
 {
     var dt = canvas.toDataURL("image/png");
 
-    if ("download" in $("#btnSave").get(0) && !isEdge()) {
+    if (("download" in $("#btnSave").get(0)) && !isEdge()) {
         this.href = dt;
     }
     else {

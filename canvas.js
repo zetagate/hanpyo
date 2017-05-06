@@ -5,7 +5,7 @@ var H_AX = 40; //axis
 var MGN = 2.5; //margin
 
 var COLOR_BG1 = "#FFFFFF";
-var COLOR_BG2 = "#FBFBFF";
+var COLOR_BG2 = "#FFFFFF";
 var COLOR_LINE = "#000000";
 var COLOR_TEXT = "#000000";
 var FONT_TEXT = "13px dotum";
@@ -83,7 +83,7 @@ function drawSelection(ctx, times, thickness)
 
     ctx.beginPath();
     ctx.lineWidth = thickness;
-    ctx.strokeStyle="#2244BB";
+    ctx.strokeStyle="#F72244";
 
     if(times.length == 0) return;
     for(var i=0; i<times.length; i++) {
@@ -118,6 +118,7 @@ function drawCartList(ctx, db, list)
             var ys;
             var height;
             var tgt = times[j][0];
+            var proFlag = true;
             xs = MGN + W_AX + Math.floor(tgt/100)*W_C;
             if(tgt%100<17) {
                 ys = MGN + H_AX + (tgt%100)*H_C;
@@ -126,6 +127,7 @@ function drawCartList(ctx, db, list)
             else {
                 ys = MGN + H_AX + 18*H_C;
                 height = H_C*2;
+                //proFlag = false;
             }
 
             ctx.fillStyle = COLOR_SET[i%COLOR_SET.length];
@@ -134,7 +136,8 @@ function drawCartList(ctx, db, list)
             ctx.strokeStyle="#000000";
             ctx.lineWidth=2;
             ctx.strokeRect(xs, ys, W_C, height);
-            var text = sbj[D_KOR] + "\n" + sbj[D_CLS] + " " + sbj[D_PRO];
+            var text = sbj[D_KOR] + "\n" + sbj[D_CLS];
+            if(proFlag) text += " " + sbj[D_PRO];
             drawTextBox(ctx, text, xs+2, ys+20, W_C-4);
         }
     }

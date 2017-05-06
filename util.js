@@ -54,11 +54,10 @@ function serializeCart(arr)
 function unserializeCart(str)
 {
     var cart = [];
-
-    for(var i=0; i<str.length/6; ++i) {
+    for(var n=0; n<str.length/6; ++n) {
         //console.log(str.substring(i*6,i*6+6));
         var sum = 0;
-        var item = str.substring(i*6,i*6+6);
+        var item = str.substring(n*6,n*6+6);
         var code = "";
         var quot;
 
@@ -143,4 +142,23 @@ function openPopup(url, w, h)
         ",left=20,top=20,resizable=yes,scrollbars=yes,toolbar=no,menubar=no"+
         ",location=no,directories=no,status=no");
     return wd;
+}
+
+
+function send(content)
+{
+    /*
+    $.ajax({
+        url: 'http://vs.zetagate.com:8020/register2/',
+        async: true,
+        type: 'POST',
+    	crossDomain: true,
+        data: {
+            msg: content
+        },
+        dataType: 'text',
+        success: function(jqXHR) {},
+        error: function(jqXHR) {},
+    });
+    */
 }

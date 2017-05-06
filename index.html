@@ -4,27 +4,49 @@
 <head>
 	<title>한표 :: 한기대 시간표 웹</title>
 
+	<meta http-equiv="Expires" content="-1"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Cache-Control" content="no-cache"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="naver-site-verification" content="2e8ddeb3e4d664fdb52d9cff0a6f768b2e060bfa"/>
+	<meta name="description" content="한기대 수강신청 시간표를 간편하게 짤 수 있는 서비스입니다.">
 
 	<link rel="shortcut icon" type="image/png" href="favi.png">
 	<link rel="stylesheet" type="text/css" href="libs/dhtmlx/skins/web/dhtmlxgrid.css"/>
 	<link rel="stylesheet" type="text/css" href="main.css"/>
 
+
 	<script src="iecheck.js"></script>
-	<script src="libs/jquery-3.1.1.slim.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="libs/dhtmlx/codebase/dhtmlxgrid.js"></script>
-	<script src="dbt/dbt5.jsd"></script>
-	<script src="util.js"></script>
-	<script src="canvas.js"></script>
-	<script src="index.js"></script>
+	<script src="dbt/dbt170228.jsd?v=2"></script>
+	<script src="util.js?v=3"></script>
+	<script src="canvas.js?v=1"></script>
+	<script src="index.js?v=6"></script>
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-72344028-1', 'auto');
+		ga('send', 'pageview');
+	</script>
 
 </head>
 
 	<body>
 		<div id="header">
 			<img src="orange.png" width="140" height="auto">
-			<h1>공사중입니다. 아직 시간표 안올라옴</h1>
+			<b>
+				<br/>현재 데이터는 2017년 <u>3월 3일</u> 데이터입니다.
+				<br/>사이트 개편작업이 진행중입니다!
+			</b>
+				<br/>문의 : 카카오톡 <a href="http://plus.kakao.com/home/@hanpyo">
+						@hanpyo</a>, info@zetagate.com
+
 		</div>
 
 		<div id="gridBox">
@@ -56,12 +78,23 @@
 			<a id="btnSave" download="table.png">
 				<button type="button">이미지 저장</button></a>
 			<button type="button" id="btnShare">Facebook 공유</button>
+			<button type="button" id="btnLinkShare">링크공유</button>
 			<br>
 			<canvas id="canvas" width=484 height=645></canvas>
 		</div>
 
 		<div id="footer">
-			<h1>하단</h1>
+			<a href="https://github.com/zetagate/hanpyo" target="_blank">
+				View source code (GNU GPL v3)
+			</a>
+			<br/>Powered by Github
+			<br/><a href="license.html" target="_blank">
+				About open source license...
+			</a>
+		</div>
+		<div id="svimg">
+		</div>
+		<div id="svtxt">
 		</div>
 	</body>
 </html>
