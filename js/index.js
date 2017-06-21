@@ -413,6 +413,7 @@ function onClickBtnSave()
     if (("download" in $("#btnSave").get(0)) && !isEdge() && !isMobile()) {
         var dt = canvas.toDataURL("image/png");
         //this.href = dt;
+        alert(this.href);
     }
     else {
         var p = openPopup("down.html", 505, 705);
