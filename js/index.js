@@ -406,11 +406,8 @@ function onClickBtnInfo()
 
 function onClickBtnSave()
 {
-    if(isMobile()) {
 
-    }
-
-    if (("download" in $("#btnSave").get(0)) && !isEdge() && !isMobile()) {
+    if (("download" in $("#btnSave").get(0)) && !isEdge()) {
         var dt = canvas.toDataURL("image/png");
         //this.href = dt;
         alert("[" + dt + "]");
