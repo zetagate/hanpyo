@@ -406,16 +406,20 @@ function onClickBtnInfo()
 
 function onClickBtnSave()
 {
-    var dt = canvas.toDataURL("image/png");
+    if(isMobile()) {
 
-    if (("download" in $("#btnSave").get(0)) && !isEdge()) {
-        this.href = dt;
+    }
+
+    if (("download" in $("#btnSave").get(0)) && !isEdge() && !isMobile()) {
+        var dt = canvas.toDataURL("image/png");
+        //this.href = dt;
     }
     else {
         var p = openPopup("down.html", 505, 705);
-        var div = p.document.getElementById("savingImg");
-        div.innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
+        //var div = p.document.getElementById("savingImg");
+        //div.innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
     }
+
 }
 
 
