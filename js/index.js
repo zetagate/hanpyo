@@ -409,8 +409,7 @@ function onClickBtnSave()
 
     if (("download" in $("#btnSave").get(0)) && !isEdge()) {
         var dt = canvas.toDataURL("image/png");
-        //this.href = dt;
-        alert("[" + dt + "]");
+        document.location.href = dt;
     }
     else {
         var p = openPopup("down.html", 505, 705);
