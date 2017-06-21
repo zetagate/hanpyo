@@ -51,11 +51,11 @@
 
       <script src="mobile_js/tab.js"></script>
 
-      <script src = "mobile_main.js"></script>
+      <script src = "mobile_js/mobile_main.js"></script>
       <style>
 
         #focused {
-          background-color:#abcdef;
+          background-color:#a0c0ef;
         }
 
       </style>
@@ -63,13 +63,13 @@
 
     <body>
       <div id="header">
-      <img src="png/orange.png" width="140" height="auto">
+          <img src="png/orange.png" width="140" height="auto">
       </div>
 
 
       <ul class="tab_title">
-        <li><a href="#tab1" class="selected">개설과목</a></li>
-        <li><a href="#tab2">시간표</a></li>
+        <li><a href="#tab1" id="tab_text" class="selected">개설과목</a></li>
+        <li><a href="#tab2" id="tab_text">시간표</a></li>
       </ul>
 
       <ul class="tab_panel">
@@ -93,7 +93,6 @@
 
 
         <div class="table-responsive">
-
           <table class="table table-striped">
             <thead>
               <tr>
@@ -110,54 +109,38 @@
                 <th>영강</th>
               </tr>
             </thead>
-
             <tbody id="print">
-
-                <!--<tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>-->
-
             </tbody>
           </table>
         </div>
-
-
-
-
-
-
-      <div>
-      <table class="table table-striped">
-      <button type="button" id="btnUncart" onclick="removeSub()">과목빼기</button>
-      <button type="button" id="btnUncartAll" onclick="cartReset()">초기화</button>
-          <thead>
-            <tr>
-              <th>코드</th>
-              <th>과목명</th>
-              <th>학점</th>
-              <th>분반</th>
-              <th>정원</th>
-              <th>개설학부</th>
-              <th>대상</th>
-              <th>교수님</th>
-              <th>비고</th>
-              <th>신청인원</th>
-              <th>영강</th>
-            </tr>
-          </thead>
-          <tbody id ="cart">
-
-          </tbody>
-      </table>
-      </div>
       </li>
 
+
       <li id="tab2">
-       <h1>표</h1>
+          <button type="button" id="btnUncart" onclick="removeSub()">과목빼기</button>
+          <button type="button" id="btnUncartAll" onclick="cartReset()">초기화</button>
+       <div class="table-responsive">
+       <table class="table table-striped">
+           <thead>
+             <tr>
+               <th>코드</th>
+               <th>과목명</th>
+               <th>학점</th>
+               <th>분반</th>
+               <th>정원</th>
+               <th>개설학부</th>
+               <th>대상</th>
+               <th>교수님</th>
+               <th>비고</th>
+               <th>신청인원</th>
+               <th>영강</th>
+             </tr>
+           </thead>
+           <tbody id ="cart">
+           </tbody>
+           <h1>표</h1>
+       </table>
+       </div>
       </li>
       </div>
     </div>

@@ -47,7 +47,7 @@ $(document).ready(function(){
   */
   //$("p").append("<p>appended text</p>");
 
-  
+
 
   $.each(data1, function(index,value){
   		//alert(data1[1].a);
@@ -63,14 +63,14 @@ $(document).ready(function(){
     //});
 
   $("#print tr").on("dblclick", dbclick_print);
-  
+
 
   for(var i = 0; i<cart_index.length; i++){
 		add_sub_cart(cart_index[i]);
   }
 
   //if(print.addEventListener){
-    //print.attachEvent("onRowselect", onSelectCatalog);  
+    //print.attachEvent("onRowselect", onSelectCatalog);
   //
 
 });
@@ -81,33 +81,33 @@ $(document).on('dblclick','#cart', function(){
 	console.log("카트 더블클릭");
 	/*if(select_cart_index!=-1){
 		removeSub();
-		console.log("카트더블클릭 이프");	
+		console.log("카트더블클릭 이프");
 	}
-	
+
 	select_cart_index=-1;*/
 
 
 	////////////////////////////////////////////////
-	if(select_cart_index!=-1){
+	if(select_cart_index != -1){
 		document.getElementById('cart').deleteRow(select_cart_index-1);
 		console.log("과목 빼기");
 	}
 	console.log("select_cart_index:"+select_cart_index);
 
 	console.log(cart_time_array[select_cart_index-1]);
-	
+
 	cart_time_array.splice(select_cart_index-1,1);
-	
+
 
 
 	for(var i=0; i<cart_time_array.length; i++){
 		console.log("과목빼기 여기여기");
 		for(var j=0; j<cart_time_array[i].length; j++){
-			console.log(cart_time_array[i][j]);		
+			console.log(cart_time_array[i][j]);
 		}
 	}
-	
-	select_cart_index=-1;
+
+	select_cart_index =- 1;
 	///////////////////////////////////////////////
 });
 
@@ -151,13 +151,13 @@ function searchBySub(){
 			}
 		});
 
-		
+
 	}
 	$("#print tr").on("dblclick", dbclick_print);
-	
+
 
 	for(var i = 0; i<cart_index.length; i++){
-		console.log("되냐이거??????");
+
 		add_sub_cart(cart_index[i]);
 	}
 
@@ -210,7 +210,7 @@ function test(obj){
 
     //$("#print").on("dblclick", function(){
       //console.log("더블클릭");
-      
+
 
 
       //console.log($("tr.obj").text());
@@ -227,9 +227,9 @@ function test(obj){
     //console.log(obj);
 
     //var addCartObj = obj;
-      
+
       //$("#cart").append(addCartObj);
-      
+
       //console.log($(obj).text());
         //console.log($("#print > td").text());
     //});
@@ -258,78 +258,79 @@ function add_cart(obj){
 
 
 function dbclick_print(){
-        console.log("더블클릭");
-        //console.log($(this).find("td:first").text());
-        //console.log($(this).find("td:eq(3)").text());
+    alert("과목을 추가합니다.");
+    console.log("더블클릭");
+    //console.log($(this).find("td:first").text());
+    //console.log($(this).find("td:eq(3)").text());
 
-        var select_code = $(this).find("td:first").text();
-        var select_class_num = $(this).find("td:eq(3)").text();
+    var select_code = $(this).find("td:first").text();
+    var select_class_num = $(this).find("td:eq(3)").text();
 
-        select_index = get_index(select_code, select_class_num);
-        //console.log(select_index);
+    select_index = get_index(select_code, select_class_num);
+    //console.log(select_index);
 
-        
 
-        //cart_index.push(select_index);
 
-        //console.log("asdf");
-        //for(var i=0; i<cart_index.length; i++){
-        //  console.log(cart_index[i]);
-        //}
+    //cart_index.push(select_index);
 
-        //console.log(data1[select_index].l);
-        //console.log(data1[select_index].l[5]);
-        
-        var temp = data1[select_index].l.replace("[","");
-        temp = temp.replace("]", "");
+    //console.log("asdf");
+    //for(var i=0; i<cart_index.length; i++){
+    //  console.log(cart_index[i]);
+    //}
 
-        //console.log("temp = "+temp);
+    //console.log(data1[select_index].l);
+    //console.log(data1[select_index].l[5]);
 
-        var temp= temp.split(',');
-        //console.log(typeof temp);
-        
-        /*for(var i=0; i<temp.length-1; i++){
-          console.log(temp[i]);
-        }*/
-        
-        
-        
-        
+    var temp = data1[select_index].l.replace("[","");
+    temp = temp.replace("]", "");
 
-        
-        for(var i=0; i<cart_time_array.length; i++){
-        	console.log("---------------");
-        	for(var j=0; j<cart_time_array[i].length-1; j++){
-        		for(var k=0; k<temp.length-1; k++){
-        				if(temp[k]==cart_time_array[i][j]){
-        					alert("시간표 중복 발생");
-        					return
-        				}
-        					//console.log(cart_time_array[i][j]);
-        		}
-        	}
-        }
-        
-        cart_time_array.push(temp);
-        
+    //console.log("temp = "+temp);
 
-        console.log("------------------------------------------------***");
-        for(var i=0; i<cart_time_array.length; i++){
-			for(var j=0; j<cart_time_array[i].length; j++){
-				console.log(cart_time_array[i][j]);		
-			}
+    var temp= temp.split(',');
+    //console.log(typeof temp);
+
+    /*for(var i=0; i<temp.length-1; i++){
+      console.log(temp[i]);
+    }*/
+
+
+
+
+
+
+    for(var i=0; i<cart_time_array.length; i++){
+    	console.log("---------------");
+    	for(var j=0; j<cart_time_array[i].length-1; j++){
+    		for(var k=0; k<temp.length-1; k++){
+    				if(temp[k]==cart_time_array[i][j]){
+    					alert("시간표 중복 발생");
+    					return
+    				}
+    					//console.log(cart_time_array[i][j]);
+    		}
+    	}
+    }
+
+    cart_time_array.push(temp);
+
+
+    console.log("------------------------------------------------***");
+    for(var i=0; i<cart_time_array.length; i++){
+		for(var j=0; j<cart_time_array[i].length; j++){
+			console.log(cart_time_array[i][j]);
 		}
-        
-        console.log("------------------------------------------------***");
-        //console.log(temp[1]);
+	}
 
-        //console.log(cart_choice_time[1]);
-        cart_index.push(select_index);
-      	add_sub_cart(select_index);
-      	//select_index=-1;
-      	console.log("카트 시간 배열 값 "+cart_time_array.length);
+    console.log("------------------------------------------------***");
+    //console.log(temp[1]);
 
-      	
+    //console.log(cart_choice_time[1]);
+    cart_index.push(select_index);
+  	add_sub_cart(select_index);
+  	//select_index=-1;
+  	console.log("카트 시간 배열 값 "+cart_time_array.length);
+
+
 }
 
 function select_cart(obj){
@@ -357,8 +358,8 @@ function select_cart(obj){
 function add_sub_cart(index){
 	$("#cart").append("<tr onclick='select_cart(this)'><td>"+data1[index].a+"</td><td>"+data1[index].b+"</td><td>"+data1[index].c+"</td><td>"+data1[index].d+"</td><td>"+data1[index].e+"</td><td>"+data1[index].f+"</td><td>"+data1[index].g
        +"</td><td>"+data1[index].h+"</td><td>"+data1[index].i+"</td><td>"+data1[index].j+"</td><td>"+data1[index].k+"</td></tr>");
-	
-}	
+
+}
 
 /*
 function dbclick_cart(){
@@ -376,13 +377,13 @@ function dbclick_cart(){
 ////////////////////////////////////////////////////////
 
 function insertSub(){
-	
+
 
 	/*if(select_index>0){
 		add_sub_cart(select_index);
-		//dbclick_print();	
+		//dbclick_print();
 	}*/
-	
+
 
 
 	var temp = data1[select_index].l.replace("[","");
@@ -392,16 +393,16 @@ function insertSub(){
 
     var temp= temp.split(',');
     //console.log(typeof temp);
-        
+
         /*for(var i=0; i<temp.length-1; i++){
           console.log(temp[i]);
         }*/
-        
-    
-        
-        
 
-        
+
+
+
+
+
     for(var i=0; i<cart_time_array.length; i++){
     	console.log("---------------");
     	for(var j=0; j<cart_time_array[i].length-1; j++){
@@ -414,16 +415,16 @@ function insertSub(){
         	}
         }
     }
-        
+
     cart_time_array.push(temp);
-        
-        
+
+
         //console.log(temp[1]);
 
         //console.log(cart_choice_time[1]);
     cart_index.push(select_index);
     add_sub_cart(select_index);
-      	
+
     console.log("카트 시간 배열 값 "+cart_time_array.length);
 	console.log("과목담기 실행");
 	console.log("select_index"+select_index);
@@ -438,7 +439,7 @@ function cartReset(){
 
 	cart_time_array=[];
 
-	
+
 	/*for(var i=0; i<cart_time_array.length; i++){
 		for(var j=0; j<cart_time_array[i].length; j++){
 			cart_time_array[i].pop();
@@ -448,7 +449,7 @@ function cartReset(){
 
 }
 
-//여기 수정  
+//여기 수정
 function removeSub(){
 	if(select_cart_index!=-1){
 		document.getElementById('cart').deleteRow(select_cart_index-1);
@@ -457,7 +458,7 @@ function removeSub(){
 	console.log("select_cart_index:"+select_cart_index);
 
 	console.log(cart_time_array[select_cart_index-1]);
-	
+
 	//cart_time_array[select_cart_index-1]=[];
 	cart_time_array.splice(select_cart_index-1,1);
 	console.log("제거 이후");
@@ -466,9 +467,9 @@ function removeSub(){
 
 	for(var i=0; i<cart_time_array.length; i++){
 		for(var j=0; j<cart_time_array[i].length; j++){
-			console.log(cart_time_array[i][j]);		
+			console.log(cart_time_array[i][j]);
 		}
 	}
-	
-	select_cart_index=-1;	
+
+	select_cart_index=-1;
 }

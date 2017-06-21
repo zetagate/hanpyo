@@ -41,6 +41,7 @@ canvas {
     font-family: "맑은 고딕", "Malgun Gothic", "돋움", "Dotum";
     font-size: 1.0em;
     padding-bottom: 5px;
+	text-align: center;
 }
 
 #footer {
@@ -64,7 +65,10 @@ canvas {
     width : 50%;
    	font-size : 20px;
    	text-align:center;
-    background: #e87352;
+    background: #ee7010;
 }
 
-
+#tab_text {
+	color: #ffffff;
+	font-weight: bold;
+}
