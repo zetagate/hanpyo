@@ -400,18 +400,21 @@ function onClickBtnEnter()
 
 function onClickBtnInfo()
 {
-    openPopup("info.html?v=1", 400, 600);
+    openPopup("info.html?v=1", 484, 645);
 }
 
 
 function onClickBtnSave()
 {
 
-    if (("download" in $("#btnSave").get(0)) && !isEdge()) {
-        var dt = canvas.toDataURL("image/png");
-        document.location.href = dt;
+    var dt = canvas.toDataURL("image/png");
+
+    if (("download" in $("#btnSave").get(0)) && !isEdge() && !isMobile()) {
+
+        this.href = dt;
     }
     else {
+        $("#intent").attr("value", dt);
         var p = openPopup("down.html", 505, 705);
         //var div = p.document.getElementById("savingImg");
         //div.innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
