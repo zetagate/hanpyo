@@ -409,15 +409,13 @@ function onClickBtnSave()
 
     var dt = canvas.toDataURL("image/png");
 
-    if (("download" in $("#btnSave").get(0)) && !isEdge() && !isMobile()) {
+    if (("download" in $("#btnSave").get(0)) && !isEdge()) {
 
         this.href = dt;
     }
     else {
-        var dt2 = dt.replace(/^data:image\/[^;]/, "data:application/octet-stream");
-        openPopup(dt2, 200, 200);
-        //$("#intent").attr("value", dt);
-        //var p = openPopup("down.html", 505, 705);
+        $("#intent").attr("value", dt);
+        var p = openPopup("down.html", 520, 720);
         //var div = p.document.getElementById("savingImg");
         //div.innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
     }
