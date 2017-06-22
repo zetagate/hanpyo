@@ -414,8 +414,9 @@ function onClickBtnSave()
         this.href = dt;
     }
     else {
-        $("#intent").attr("value", dt);
-        var p = openPopup("down.html", 505, 705);
+        openPopup(dt, 200, 200);
+        //$("#intent").attr("value", dt);
+        //var p = openPopup("down.html", 505, 705);
         //var div = p.document.getElementById("savingImg");
         //div.innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
     }
