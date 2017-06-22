@@ -408,15 +408,14 @@ function onClickBtnSave()
 {
 
     var dt = canvas.toDataURL("image/png");
-    var fbFlag = isFacebookApp();
 
-    if (("download" in $("#btnSave").get(0)) && !isEdge() && !fbFlag) {
+    if(isFacebookApp()) {
+        alert("페이스북 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n다른 브라우저로 접속해주세요");
+    }
+    else if (("download" in $("#btnSave").get(0)) && !isEdge()) {
         this.href = dt;
     }
     else {
-        if(fbFlag) {
-            alert("페이스북 앱에서는 저장기능을 지원하지 않습니다 ㅠㅠ");
-        }
         $("#intent").attr("value", dt);
         var p = openPopup("down.html", 520, 720);
         //var div = p.document.getElementById("savingImg");
