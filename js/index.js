@@ -414,7 +414,7 @@ function onClickBtnSave()
         this.href = dt;
     }
     else {
-        openPopup(dt, 200, 200);
+        window.open(dt, "_blank");
         //$("#intent").attr("value", dt);
         //var p = openPopup("down.html", 505, 705);
         //var div = p.document.getElementById("savingImg");
