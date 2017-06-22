@@ -39,6 +39,13 @@ function isMobile()
 }
 
 
+function isFacebookApp()
+{
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+}
+
+
 if(isIE()) {
     alert("인터넷 익스플로러 11 미만에서는\n사용할 수 없습니다.");
 }
