@@ -414,7 +414,8 @@ function onClickBtnSave()
         this.href = dt;
     }
     else {
-        window.open(dt, "_blank");
+        var dt2 = dt.replace(/^data:image\/[^;]/, "data:application/octet-stream");
+        openPopup(dt2, 200, 200);
         //$("#intent").attr("value", dt);
         //var p = openPopup("down.html", 505, 705);
         //var div = p.document.getElementById("savingImg");
