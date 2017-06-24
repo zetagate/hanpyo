@@ -141,6 +141,7 @@ function openPopup(url, w, h)
     var wd = window.open(url,"","height="+h+",width="+w+
         ",left=20,top=20,resizable=yes,scrollbars=yes,toolbar=no,menubar=no"+
         ",location=no,directories=no,status=no");
+    
     return wd;
 }
 

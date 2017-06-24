@@ -64,7 +64,6 @@ $(window).on("load", function()
     $("#comboDep").change(onSelectDep);
     $("#filter").change(onChangeFilter);
 
-
     var variables = window.location.search;
     if(variables.indexOf("c=0") == -1)
         loadCookie();
@@ -337,8 +336,11 @@ function onClickBtnShare()
 
 function onClickBtnLinkShare()
 {
-    $("#svtxt").html("http://hanpyo.com/s?d="+serializeCart(cartedList));
-    alert("페이지 맨 하단의 주소를 복사하여 공유하세요.");
+    //$("#svtxt").html("http://hanpyo.com/s?d="+serializeCart(cartedList));
+    //alert("페이지 맨 하단의 주소를 복사하여 공유하세요.");
+
+    var link = "http://hanpyo.com/s?d="+serializeCart(cartedList);
+    prompt("아래 주소를 복사하세요.", link);
 }
 
 
@@ -400,22 +402,31 @@ function onClickBtnEnter()
 
 function onClickBtnInfo()
 {
-    openPopup("info.html?v=1", 400, 600);
+    openPopup("info.html?v=1", 484, 645);
 }
 
 
 function onClickBtnSave()
 {
+
     var dt = canvas.toDataURL("image/png");
 
-    if (("download" in $("#btnSave").get(0)) && !isEdge()) {
+    if(isFacebookApp()) {
+        alert("페이스북 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n오른쪽 위의 메뉴를 클릭하여 다른 브라우저로 접속해주세요");
+    }
+    else if(isKakaoApp()) {
+        alert("카카오톡 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n오른쪽 위의 메뉴를 클릭하여 다른 브라우저로 접속해주세요");
+    }
+    else if (("download" in $("#btnSave").get(0)) && !isEdge()) {
         this.href = dt;
     }
     else {
-        var p = openPopup("down.html", 505, 705);
-        var div = p.document.getElementById("savingImg");
-        div.innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
+        $("#intent").attr("value", dt);
+        var p = openPopup("down.html", 520, 720);
+        //var div = p.document.getElementById("savingImg");
+        //div.innerHTML = "<img src='"+dt+"'alt='from canvas'/>";
     }
+
 }
 
 
