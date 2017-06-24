@@ -64,14 +64,6 @@ $(window).on("load", function()
     $("#comboDep").change(onSelectDep);
     $("#filter").change(onChangeFilter);
 
-    $('#testa').on("click", function(e){
-        var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        $('#testa').attr({
-            'download': 'myFilename.png',  /// set filename
-            'href'    : image              /// set data-uri
-        });
-    });
-
     var variables = window.location.search;
     if(variables.indexOf("c=0") == -1)
         loadCookie();
