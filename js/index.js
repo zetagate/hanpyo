@@ -65,7 +65,7 @@ $(window).on("load", function()
     $("#filter").change(onChangeFilter);
 
     $('#testa').on("click", function(e){
-        var image = canvas.toDataURL("image/png");
+        var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
         $('#testa').attr({
             'download': 'myFilename.png',  /// set filename
             'href'    : image              /// set data-uri
