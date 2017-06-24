@@ -412,7 +412,10 @@ function onClickBtnSave()
     var dt = canvas.toDataURL("image/png");
 
     if(isFacebookApp()) {
-        alert("페이스북 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n다른 브라우저로 접속해주세요");
+        alert("페이스북 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n오른쪽 위의 메뉴를 클릭하여 다른 브라우저로 접속해주세요");
+    }
+    else if(isKakaoApp()) {
+        alert("카카오톡 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n오른쪽 위의 메뉴를 클릭하여 다른 브라우저로 접속해주세요");
     }
     else if (("download" in $("#btnSave").get(0)) && !isEdge()) {
         this.href = dt;
