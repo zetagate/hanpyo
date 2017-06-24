@@ -48,7 +48,7 @@ function isFacebookApp()
 function isKakaoApp()
 {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
-    return (ua.indexOf("KAKAO") > -1));
+    return (ua.indexOf("KAKAO") > -1);
 }
 
 
