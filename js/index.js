@@ -98,7 +98,7 @@ function setSizes()
 function initGrid(grid)
 {
     //grid.setImagePath("dhtmlx/skins/web/imgs/dhxgrid_terrace/");
-    grid.setHeader("코드,과목명,분반,교수님,대상,학점,비고,정원,신청,개설학부");
+    grid.setHeader("코드,과목명,분반,교수님,대상,학점,비고,정원,설계,개설학부");
     grid.setInitWidths("55,150,40,60,70,40,40,40,40,100");
     grid.setColAlign("left,left,left,left,left,left,left,left,left");
     grid.setColTypes("txt,txt,txt,txt,txt,txt,txt,txt,txt,txt");
@@ -402,7 +402,7 @@ function onClickBtnEnter()
 
 function onClickBtnInfo()
 {
-    openPopup("info.html?v=1", 484, 645);
+    openPopup("info.html?v=2", 484, 645);
 }
 
 
@@ -412,10 +412,10 @@ function onClickBtnSave()
     var dt = canvas.toDataURL("image/png");
 
     if(isFacebookApp()) {
-        alert("페이스북 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n오른쪽 위의 메뉴를 클릭하여 다른 브라우저로 접속해주세요");
+        alert("페이스북 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n링크공유 기능을 사용하거나, 오른쪽 위의 메뉴를 클릭하여 다른 브라우저로 접속해주세요");
     }
     else if(isKakaoApp()) {
-        alert("카카오톡 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n오른쪽 위의 메뉴를 클릭하여 다른 브라우저로 접속해주세요");
+        alert("카카오톡 앱에서는 아직 저장기능을 지원하지 않습니다 ㅠㅠ\n링크공유 기능을 사용하거나, 오른쪽 위의 메뉴를 클릭하여 다른 브라우저로 접속해주세요");
     }
     else if (("download" in $("#btnSave").get(0)) && !isEdge()) {
         this.href = dt;
