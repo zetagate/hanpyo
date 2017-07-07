@@ -402,7 +402,7 @@ function onClickBtnEnter()
 
 function onClickBtnInfo()
 {
-    openPopup("info.html?v=46", 484, 645);
+    openPopup("info.html?v=47", 484, 645);
 }
 
 
