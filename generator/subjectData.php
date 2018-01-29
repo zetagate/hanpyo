@@ -21,16 +21,17 @@ foreach (explode("\n", $data) as $line) {
      * var D_TME = 11;
      */
 
-    $code        = $arr[2];
-    $name        = $arr[3];
-    $credit      = $arr[5];
-    $capacity    = $arr[9];
-    $class       = $arr[8];
-    $department  = $arr[11];
-    $target      = $arr[33];
-    $professor   = $arr[50];
-    $isEnglish   = $arr[51];
-    $isELearning = $arr[53];
+    $code         = $arr[2];
+    $name         = $arr[3];
+    $credit       = $arr[5];
+    $capacity     = $arr[9];
+    $class        = $arr[8];
+    $department   = $arr[11];
+    $target       = $arr[33];
+    $professor    = $arr[50];
+    $designCredit = $arr[52];
+    $isEnglish    = $arr[51];
+    $isELearning  = $arr[53];
 
     $timetable = [];
 
@@ -52,7 +53,7 @@ foreach (explode("\n", $data) as $line) {
     $item[] = $target;
     $item[] = $professor;
     $item[] = $isEnglish;
-    $item[] = $capacity;
+    $item[] = $designCredit;
     $item[] = $isELearning;
     $item[] = $timetable;
 
