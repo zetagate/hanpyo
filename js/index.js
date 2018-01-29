@@ -8,7 +8,7 @@ var softLoaderInterval;
 var MIN_GRIDBOX_WIDTH = 230;
 var CANVAS_PADDING = 10;
 
-var COOKIE_NAME = "v2017002";
+var COOKIE_NAME = "v2018001";
 
 var D_COD = 0;
 var D_KOR = 1;
