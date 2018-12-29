@@ -1,4 +1,4 @@
-var grid1;
+﻿var grid1;
 var grid2;
 var canvas;
 var ctx;
@@ -402,7 +402,7 @@ function onClickBtnEnter()
 
 function onClickBtnInfo()
 {
-    openPopup("info.html?v=49", 484, 645);
+    openPopup("info.html?v=50", 484, 645);
 }
 
 
