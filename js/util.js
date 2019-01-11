@@ -148,18 +148,8 @@ function openPopup(url, w, h)
 
 function send(content)
 {
-    /*
-    $.ajax({
-        url: 'http://vs.zetagate.com:8020/register2/',
-        async: true,
-        type: 'POST',
-    	crossDomain: true,
-        data: {
-            msg: content
-        },
-        dataType: 'text',
-        success: function(jqXHR) {},
-        error: function(jqXHR) {},
-    });
-    */
+  gtag('event', 'acc', {
+  'event_category' : 'cart',
+  'event_label' : content
+});
 }
