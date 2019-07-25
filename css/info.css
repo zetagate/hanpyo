@@ -20,3 +20,17 @@ pre {
     overflow: auto;
     white-space: pre-wrap;
 }
+
+.notice {
+    max-width:600px;
+    margin:auto;
+    font-size:1em;
+}
+
+.notice > h4 {
+    margin-bottom: 0.2em;
+}
+
+.notice > ul {
+    margin-top: 0.2em;
+}
