@@ -39,3 +39,8 @@ pre {
 .notice > ul {
     margin-top: 0.2em;
 }
+
+.notice-closed {
+    text-decoration: line-through;
+    color: gray;
+}
