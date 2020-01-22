@@ -8,6 +8,7 @@
     <sch/> <!--schedules-->
     <pla/> <!--place-->
     <crd/> <!--credits-->
+    <dsg/> <!--design credits-->
     <dep/> <!--department-->
     <pfi/> <!--professor id-->
     <pfn/> <!--professor name-->
@@ -24,6 +25,7 @@
     <sch/> <!--schedules-->
     <pla/> <!--place-->
     <crd/> <!--credits-->
+    <dsg/> <!--design credits-->
     <dep/> <!--department-->
     <pfi/> <!--professor id-->
     <pfn/> <!--professor name-->

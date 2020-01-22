@@ -62,25 +62,37 @@ function processData(data)
         var obj = {};
         output += "[";
         for(var j=0; j<subject.children.length; j++) {
-            if(subject.children[j].tagName == "tty") continue;
             if(subject.children[j].tagName == "dvi") continue;
+            if(subject.children[j].tagName == "pfi") continue;
             obj[subject.children[j].tagName] = subject.children[j].innerHTML;
-            if(subject.children[j].tagName.search("tm") != 0) {
+            if(subject.children[j].tagName.search("sch") == -1) {
                 output += "\"" + packSpace(subject.children[j].innerHTML) + "\",";
             }
         }
+
+        var str = obj["sch"];
+        delete obj["sch"];
         output += "["
-        obj.tm = new Array();
-        for(var j=0; j<16; j++) {
-            var str = obj["tm"+(j+1)];
-            delete obj["tm"+(j+1)];
-            if(!str || str.length<5) continue;
-            var tm = 0;
-            tm += DAY_TIME[str.charAt(0)];
-            tm += 2*(parseInt(str.substr(2,2)-1));
-            tm += AB_TIME[str.charAt(4)];
-            obj.tm[j] = tm;
-            output += tm + ",";
+        var unit = str.split(",");
+        for(var j=0; j<unit.length; j++) {
+            if(unit[j].length == 8) {
+                var startStr = unit[j].substr(1,3);
+                var endStr = unit[j].substr(5,3);
+                var startTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
+                var endTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(endStr.substr(0,2))-1) + AB_TIME[endStr.charAt(2)];
+
+                for(var k=startTime; k<endTime; k++) {
+                    output += k + ",";
+                }
+            }
+            else if(unit[j].length == 4) {
+                var startStr = unit[j].substr(1,3);
+                var startTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
+                output += startTime + ",";
+            }
+            else {
+                console.log(subject);
+            }
         }
         output += "]";
         output += "],\r\n";
