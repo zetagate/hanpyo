@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <sbj> <!--subject-->
+    <cod/> <!--subject code-->
+    <ttk/> <!--title korean-->
+    <cls/> <!--class no-->
+    <dvi/> <!--division-->
+    <sch/> <!--schedules-->
+    <pla/> <!--place-->
+    <crd/> <!--credits-->
+    <dep/> <!--department-->
+    <pfi/> <!--professor id-->
+    <pfn/> <!--professor name-->
+    <cap/> <!--capacity-->
+    <elr/> <!--e-larning-->
+    <eng/> <!--english-->
+  </sbj>
+
+  <sbj> <!--subject-->
+    <cod/> <!--subject code-->
+    <ttk/> <!--title korean-->
+    <cls/> <!--class no-->
+    <dvi/> <!--division-->
+    <sch/> <!--schedules-->
+    <pla/> <!--place-->
+    <crd/> <!--credits-->
+    <dep/> <!--department-->
+    <pfi/> <!--professor id-->
+    <pfn/> <!--professor name-->
+    <cap/> <!--capacity-->
+    <elr/> <!--e-larning-->
+    <eng/> <!--english-->
+  </sbj>
+
+</root>
