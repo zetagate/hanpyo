@@ -1,6 +1,6 @@
 function idxToPk(idx)
 {
-    return SUBJECT_DATA[idx][0] + SUBJECT_DATA[idx][3];
+    return SUBJECT_DATA[idx][0] + SUBJECT_DATA[idx][2];
 }
 
 
@@ -9,7 +9,7 @@ function pkToIdx(pk)
     var cod = pk.substring(0,6);
     var cls = pk.substring(6,8);
     for(var i in SUBJECT_DATA) {
-        if(cod == SUBJECT_DATA[i][0] && cls == SUBJECT_DATA[i][3]) {
+        if(cod == SUBJECT_DATA[i][0] && cls == SUBJECT_DATA[i][2]) {
             return Number(i);
         }
     }

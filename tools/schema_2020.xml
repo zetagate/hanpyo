@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sbj> <!--subject-->
-    <cod/> <!--subject code-->
-    <ttk/> <!--title korean-->
-    <cls/> <!--class no-->
-    <dvi/> <!--division-->
-    <sch/> <!--schedules-->
-    <pla/> <!--place-->
-    <crd/> <!--credits-->
-    <dsg/> <!--design credits-->
-    <dep/> <!--department-->
-    <pfi/> <!--professor id-->
-    <pfn/> <!--professor name-->
-    <cap/> <!--capacity-->
-    <elr/> <!--e-larning-->
-    <eng/> <!--english-->
+    <cod/> <!--subject code--> 0
+    <ttk/> <!--title korean--> 1
+    <cls/> <!--class no--> 2
+    <dvi/> <!--division--> 3
+    <sch/> <!--schedules--> 4
+    <pla/> <!--place--> 5
+    <crd/> <!--credits--> 6
+    <dsg/> <!--design credits--> 7
+    <dep/> <!--department--> 8
+    <pfi/> <!--professor id--> 9
+    <pfn/> <!--professor name--> 10
+    <cap/> <!--capacity--> 11
+    <elr/> <!--e-larning--> 12
+    <eng/> <!--english--> 13
   </sbj>
 
   <sbj> <!--subject-->

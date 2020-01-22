@@ -13,15 +13,15 @@ var COOKIE_NAME = "v2018001";
 var D_COD = 0;
 var D_KOR = 1;
 var D_CLS = 2;
-var D_PRO = 6;
+var D_PRO = 8;
 // var D_TAR = 6;
-var D_CRD = 3;
-var D_DCR = 4;
-var D_ENG = 9;
-var D_ELR = 8;
-var D_CAP = 7;
-var D_DEP = 5;
-var D_TME = 10;
+var D_CRD = 5;
+var D_DCR = 6;
+var D_ENG = 11;
+var D_ELR = 10;
+var D_CAP = 9;
+var D_DEP = 7;
+var D_TME = 12;
 
 $(window).on("load", function()
 {

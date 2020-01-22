@@ -65,8 +65,15 @@ function processData(data)
             if(subject.children[j].tagName == "dvi") continue;
             if(subject.children[j].tagName == "pfi") continue;
             obj[subject.children[j].tagName] = subject.children[j].innerHTML;
-            if(subject.children[j].tagName.search("sch") == -1) {
-                output += "\"" + packSpace(subject.children[j].innerHTML) + "\",";
+        }
+
+        var cols = ["cod", "ttk", "cls", "dvi", "pla", "crd", "dsg", "dep", "pfn", "cap", "elr", "eng"];
+        for(var j=0; j<cols.length; j++) {
+            if(obj.hasOwnProperty(cols[j])) {
+                output += "\"" + packSpace(obj[cols[j]]) + "\",";
+            }
+            else {
+                output += "\"\",";
             }
         }
 
@@ -81,7 +88,7 @@ function processData(data)
                 var startTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
                 var endTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(endStr.substr(0,2))-1) + AB_TIME[endStr.charAt(2)];
 
-                for(var k=startTime; k<endTime; k++) {
+                for(var k=startTime; k<=endTime; k++) {
                     output += k + ",";
                 }
             }
