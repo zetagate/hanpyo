@@ -13,15 +13,16 @@ var COOKIE_NAME = "v2018001";
 var D_COD = 0;
 var D_KOR = 1;
 var D_CLS = 2;
-var D_PRO = 8;
-// var D_TAR = 6;
+var D_TAR = 3;
+var D_PLA = 4;
 var D_CRD = 5;
 var D_DCR = 6;
-var D_ENG = 11;
-var D_ELR = 10;
-var D_CAP = 9;
 var D_DEP = 7;
-var D_TME = 12;
+var D_PRO = 8;
+var D_CAP = 9;
+// var D_ENG = 11;
+// var D_ELR = 10;
+var D_TME = 10;
 
 $(window).on("load", function()
 {
@@ -98,8 +99,8 @@ function setSizes()
 function initGrid(grid)
 {
     //grid.setImagePath("dhtmlx/skins/web/imgs/dhxgrid_terrace/");
-    grid.setHeader("코드,과목명,분반,교수님,..,학점,비고,정원,설계,개설학부");
-    grid.setInitWidths("55,150,40,60,20,40,40,40,40,100");
+    grid.setHeader("코드,과목명,분반,교수님,대상,학점,비고,정원,설계,개설학부");
+    grid.setInitWidths("55,150,40,60,60,40,40,40,40,100");
     grid.setColAlign("left,left,left,left,left,left,left,left,left");
     grid.setColTypes("txt,txt,txt,txt,txt,txt,txt,txt,txt,txt");
     grid.setColSorting("str,str,str,str,str,str,str,str,str,str");
@@ -154,7 +155,7 @@ function addRow(grid, idx, row)
     var ttk = SUBJECT_DATA[idx][D_KOR]; //title korean
     var cls = SUBJECT_DATA[idx][D_CLS]; //class
     var prf = SUBJECT_DATA[idx][D_PRO]; //professor
-    var tar = "" //target
+    var tar = SUBJECT_DATA[idx][D_TAR];
     var crd = SUBJECT_DATA[idx][D_CRD]; //credits
     var spe = "";
     var cap = SUBJECT_DATA[idx][D_CAP]; //capacity
@@ -162,13 +163,13 @@ function addRow(grid, idx, row)
     var dep = SUBJECT_DATA[idx][D_DEP]; //depeartment
 
 
-    if(SUBJECT_DATA[idx][D_ENG] == "1" && SUBJECT_DATA[idx][D_ELR] == "1")
-        spe += "영+e";
-    else if(SUBJECT_DATA[idx][D_ENG] == "1")
-        spe += "영강";
-    else if(SUBJECT_DATA[idx][D_ELR] == "1")
-        spe += "e러닝";
-
+    // if(SUBJECT_DATA[idx][D_ENG] == "1" && SUBJECT_DATA[idx][D_ELR] == "1")
+    //     spe += "영+e";
+    // else if(SUBJECT_DATA[idx][D_ENG] == "1")
+    //     spe += "영강";
+    // else if(SUBJECT_DATA[idx][D_ELR] == "1")
+    //     spe += "e러닝";
+    spe += SUBJECT_DATA[idx][D_PLA];
 
 
     grid.addRow(row, [cod, ttk, cls, prf, tar, crd, spe, cap, dsg, dep]);
