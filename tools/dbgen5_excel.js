@@ -39,10 +39,10 @@
  
  function processData(data) {
     let output = "var SUBJECT_DATA = [\r\n";
-    
+
     data.SheetNames.forEach(sheetName => {
         let rows = XLSX.utils.sheet_to_json(data.Sheets[sheetName]);
-        
+
         rows.forEach(row => {
             const wantedInfomation = [
                 "과목코드",
@@ -65,41 +65,46 @@
 
             if (row.hasOwnProperty("강의시간")) {
                 subjectInfo += "[";
-                const str = row["강의시간"];
-                var unit = str.split(",");
-                let lastDay = "";
-                for(var j=0; j<unit.length; j++) {
-                    if(unit[j].length == 8) {
-                        var startStr = unit[j].substr(1,3);
-                        var endStr = unit[j].substr(5,3);
-                        var startTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
-                        var endTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(endStr.substr(0,2))-1) + AB_TIME[endStr.charAt(2)];
-        
-                        for(var k=startTime; k<=endTime; k++) {
-                            subjectInfo += k + ",";
+                const str = row["강의시간"] ?? row["강의시간▲"];
+                if(str !== "0") {
+                    var unit = str.split(",");
+                    let lastDay = "";
+                    for(var j=0; j<unit.length; j++) {
+                        if(unit[j].length == 8) {
+                            var startStr = unit[j].substr(1,3);
+                            var endStr = unit[j].substr(5,3);
+                            var startTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
+                            var endTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(endStr.substr(0,2))-1) + AB_TIME[endStr.charAt(2)];
+            
+                            for(var k=startTime; k<=endTime; k++) {
+                                subjectInfo += k + ",";
+                            }
+                            lastDay = unit[j].charAt(0);
                         }
-                        lastDay = unit[j].charAt(0);
-                    }
-                    else if (lastDay != "" && unit[j].length == 7) {
-                        let startStr = unit[j].substr(0,3);
-                        let endStr = unit[j].substr(4,3);
-                        let startTime = DAY_TIME[lastDay] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
-                        let endTime = DAY_TIME[lastDay] + 2*(parseInt(endStr.substr(0,2))-1) + AB_TIME[endStr.charAt(2)];
-        
-                        for(let k=startTime; k<=endTime; k++) {
-                            subjectInfo += k + ",";
+                        else if (lastDay != "" && unit[j].length == 7) {
+                            let startStr = unit[j].substr(0,3);
+                            let endStr = unit[j].substr(4,3);
+                            let startTime = DAY_TIME[lastDay] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
+                            let endTime = DAY_TIME[lastDay] + 2*(parseInt(endStr.substr(0,2))-1) + AB_TIME[endStr.charAt(2)];
+            
+                            for(let k=startTime; k<=endTime; k++) {
+                                subjectInfo += k + ",";
+                            }
+                        }
+                        else if(unit[j].length == 4) {
+                            var startStr = unit[j].substr(1,3);
+                            var startTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
+                            subjectInfo += startTime + ",";
+                        }
+                        else {
+                            console.log(row);
                         }
                     }
-                    else if(unit[j].length == 4) {
-                        var startStr = unit[j].substr(1,3);
-                        var startTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
-                        subjectInfo += startTime + ",";
-                    }
-                    else {
-                        console.log(row);
-                    }
+                    subjectInfo += "]],";
                 }
-                subjectInfo += "]],";
+                else {
+                    subjectInfo += "]],";
+                }
             }
             else subjectInfo += "[]],";
 
