@@ -9,8 +9,8 @@ var COLOR_BG2 = "#FFFFFF";
 var COLOR_LINE = "#000000";
 var COLOR_TEXT = "#000000";
 var FONT_TEXT = "13px dotum";
-var COLOR_SET = ["#42BAFF","#00DC6D","#F1BE5B","#FFA6E9","#FFAB6E",
-                "#FFFD66","#A4A4A4","#E191FF","#85E4FF","#FF7F32"];
+var COLOR_SET = ["#7BC4ED","#F77F6F","#AEE68C","#8BD3C8","#FDCCE6",
+                "#BEB9DC","#BD7EBF","#FEB55A","#B8B0B0","#FFF3A5"];
 
 var TIME_NAME = ["01A","01B","02A","02B","03A","03B","04A","04B","05A","05B","06A","06B","07A","07B","08A","08B","09A","09B"];
 var CLOCK_NAME = ["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"];
@@ -83,7 +83,7 @@ function drawSelection(ctx, times, thickness)
 
     ctx.beginPath();
     ctx.lineWidth = thickness;
-    ctx.strokeStyle="#F72244";
+    ctx.strokeStyle="#EE3355";
 
     if(times.length == 0) return;
     for(var i=0; i<times.length; i++) {
@@ -134,7 +134,7 @@ function drawCartList(ctx, db, list)
             ctx.fillRect(xs, ys, W_C, height);
             ctx.fillStyle="#000000";
             ctx.strokeStyle="#000000";
-            ctx.lineWidth=2;
+            ctx.lineWidth=1.0;
             ctx.strokeRect(xs, ys, W_C, height);
             var text = sbj[D_KOR] + "\n" + sbj[D_CLS];
             if(proFlag) text += " " + sbj[D_PRO];
