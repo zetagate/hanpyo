@@ -122,15 +122,18 @@ function mergeNum(arr)
     if(arr.length == 0)
         return [];
 
-    var result = [[arr[0],1]];
-    var prev = arr[0];
+    const times = arr.map(x => parseInt(x));
+    const isOnlines = arr.map(x => x.search("o") != -1);
 
-    for(var i=1; i<arr.length; i++) {
-        if(arr[i]-prev == 1)
+    var result = [[times[0], 1, isOnlines[0]]];
+    var prev = times[0];
+
+    for(var i=1; i<times.length; i++) {
+        if(times[i]-prev == 1)
             ++result[result.length-1][1];
         else
-            result.push([arr[i], 1]);
-        prev = arr[i];
+            result.push([times[i], 1, isOnlines[i]]);
+        prev = times[i];
     }
     return result;
 }

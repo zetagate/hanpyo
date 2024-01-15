@@ -48,7 +48,7 @@
                 "과목코드",
                 "교과목명",
                 "분반",
-                "수강신청\r\n가능학년",
+                "수강신청 가능학년",
                 "강의실",
                 "학\r\n점",
                 "설\r\n계",
@@ -56,8 +56,8 @@
                 // "설계",
                 "개설학부(과)",
                 "담당교수",
-                "수정\r\n정원",
-                // "수강정원",
+                // "수정\r\n정원",
+                "수강\r\n정원",
             ]
 
             let subjectInfo = "[";
@@ -73,6 +73,10 @@
                     var unit = str.split(",");
                     let lastDay = "";
                     for(var j=0; j<unit.length; j++) {
+                        let isOnline = false;
+                        if(unit[j].search("(온라인)") != -1) {
+                            isOnline = true;
+                        }
                         unit[j] = unit[j].replaceAll("(온라인)", "");
                         if(unit[j].length == 8) {
                             var startStr = unit[j].substr(1,3);
@@ -81,7 +85,7 @@
                             var endTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(endStr.substr(0,2))-1) + AB_TIME[endStr.charAt(2)];
             
                             for(var k=startTime; k<=endTime; k++) {
-                                subjectInfo += k + ",";
+                                subjectInfo += `"${k}${(isOnline?"o":"")}"` + ",";
                             }
                             lastDay = unit[j].charAt(0);
                         }
@@ -92,18 +96,18 @@
                             let endTime = DAY_TIME[lastDay] + 2*(parseInt(endStr.substr(0,2))-1) + AB_TIME[endStr.charAt(2)];
             
                             for(let k=startTime; k<=endTime; k++) {
-                                subjectInfo += k + ",";
+                                subjectInfo += `"${k}${(isOnline?"o":"")}"` + ",";
                             }
                         }
                         else if (lastDay != "" && unit[j].length == 3) {
                             let startStr = unit[j].substr(0,3);
                             let startTime = DAY_TIME[lastDay] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
-                            subjectInfo += startTime + ",";
+                            subjectInfo += `"${startTime}${(isOnline?"o":"")}"` + ",";
                         }
                         else if(unit[j].length == 4) {
                             var startStr = unit[j].substr(1,3);
                             var startTime = DAY_TIME[unit[j].charAt(0)] + 2*(parseInt(startStr.substr(0,2))-1) + AB_TIME[startStr.charAt(2)];
-                            subjectInfo += startTime + ",";
+                            subjectInfo += `"${startTime}${(isOnline?"o":"")}"` + ",";
                         }
                         else {
                             console.log(row);

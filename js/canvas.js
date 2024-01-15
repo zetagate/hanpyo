@@ -136,7 +136,7 @@ function drawCartList(ctx, db, list)
             ctx.strokeStyle="#000000";
             ctx.lineWidth=1.0;
             ctx.strokeRect(xs, ys, W_C, height);
-            var text = sbj[D_KOR] + "\n" + sbj[D_CLS];
+            var text = (times[j][2] ? "(온)" : "") + sbj[D_KOR] + "\n" + sbj[D_CLS];
             if(proFlag) text += " " + sbj[D_PRO];
             drawTextBox(ctx, text, xs+2, ys+20, W_C-4);
         }
